@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors - Modern Scalo Palette (Itero + ReactBits) */
+  --color-deep-navy: #0B0B0F;
+  --color-navy-blue: #111217;
+  --color-scalo-primary: #3B82F6;
+  --color-scalo-accent-cyan: #22D3EE;
+  --color-scalo-accent-violet: #8B5CF6;
+  --color-scalo-accent-pink: #A78BFA;
+  
+  /* Fonts */
+  --font-space: 'Space Grotesk', sans-serif;
+  --font-outfit: 'Space Grotesk', sans-serif; /* Backwards compatibility for existing classes */
+  
+  /* Glassmorphism primitives */
+  --background-image-glass: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+  
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 4s ease-in-out infinite;
+  --animate-reveal: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-gradient-slow: gradientShift 12s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+  @keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.3)); }
+    50% { filter: drop-shadow(0 0 35px rgba(59, 130, 246, 0.6)); }
+  }
+  @keyframes reveal {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-deep-navy text-slate-200 antialiased selection:bg-scalo-primary selection:text-white overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-2xl;
+  }
+  .text-glow {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+  }
+  .bg-nebula {
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 50% 10%, rgba(34, 211, 238, 0.05) 0%, transparent 30%);
+  }
+}

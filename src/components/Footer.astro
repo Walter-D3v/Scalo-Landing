@@ -1,0 +1,74 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-20 bg-deep-navy/80 border-t border-white/5 relative overflow-hidden">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 relative z-10">
+    <!-- Brand Info -->
+    <div class="col-span-1 md:col-span-1">
+      <div class="flex items-center gap-2 mb-6">
+        <div class="w-10 h-10 bg-scalo-primary rounded-lg flex items-center justify-center shadow-lg shadow-scalo-primary/30">
+          <span class="text-white font-bold text-xl">S</span>
+        </div>
+        <span class="text-white font-black text-2xl tracking-tighter font-outfit uppercase">Scalo</span>
+      </div>
+      <p class="text-slate-400 text-sm leading-relaxed mb-6">
+        Transformando datos complejos en decisiones estratégicas simples. 
+        Nuestra misión es empoderar a la próxima generación de startups.
+      </p>
+      
+      <!-- Socials -->
+      <div class="flex items-center gap-4">
+        <a href="#" class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:bg-scalo-primary hover:text-white transition-all duration-300">𝕏</a>
+        <a href="#" class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:bg-scalo-primary hover:text-white transition-all duration-300">in</a>
+        <a href="#" class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:bg-scalo-primary hover:text-white transition-all duration-300">gh</a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div>
+      <h4 class="text-white font-bold mb-6 font-outfit">Producto</h4>
+      <ul class="space-y-4 text-sm text-slate-400">
+        <li><a href="#features" class="hover:text-scalo-accent-cyan transition-colors">Características</a></li>
+        <li><a href="#demo" class="hover:text-scalo-accent-cyan transition-colors">Ver Demo</a></li>
+        <li><a href="#pricing" class="hover:text-scalo-accent-cyan transition-colors">Planes & Precios</a></li>
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Seguridad</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-white font-bold mb-6 font-outfit">Recursos</h4>
+      <ul class="space-y-4 text-sm text-slate-400">
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Documentación</a></li>
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Blog</a></li>
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Comunidad</a></li>
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">API Reference</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-white font-bold mb-6 font-outfit">Compañía</h4>
+      <ul class="space-y-4 text-sm text-slate-400">
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Sobre Nosotros</a></li>
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Carreras</a></li>
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Privacidad</a></li>
+        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Términos</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6 border-t border-white/5 pt-10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-500 font-bold uppercase tracking-widest relative z-10">
+    <p>© {currentYear} Scalo. Todos los derechos reservados.</p>
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+        System Operational
+      </div>
+      <div>HECHO CON ❤️ POR SCALO TEAM</div>
+    </div>
+  </div>
+  
+  <!-- Subtle Gradient Decoration -->
+  <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-scalo-primary/10 blur-[120px] rounded-full"></div>
+  <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-scalo-accent-violet/10 blur-[120px] rounded-full"></div>
+</footer>

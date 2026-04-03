@@ -1,0 +1,161 @@
+---
+export interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+  badge?: string;
+}
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  features: Feature[];
+}
+
+const { title, subtitle, description, features } = Astro.props as Props;
+---
+
+<section id="features" class="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">{title}</h2>
+      {subtitle && <p class="section-subtitle gradient-text">{subtitle}</p>}
+      {description && <p class="section-description">{description}</p>}
+    </div>
+
+    <div class="features-grid">
+      {features.map((feature, index) => (
+        <div class="feature-card glass card-3d reveal" style={`animation-delay: ${index * 0.1}s`}>
+          <div class="feature-icon">{feature.icon}</div>
+          <h3 class="feature-title">{feature.title}</h3>
+          <p class="feature-description">{feature.description}</p>
+          {feature.badge && (
+            <span class="badge badge-primary">{feature.badge}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .features::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    z-index: 1;
+    position: relative;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .feature-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(99, 102, 241, 0.1) 100%);
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  .feature-card:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.1) 100%);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.2);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.15) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+  }
+
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .feature-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .feature-card .badge {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .features {
+      padding: 4rem 1rem;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

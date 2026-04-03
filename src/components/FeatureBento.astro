@@ -1,0 +1,24 @@
+---
+import BentoGrid from './react/BentoGrid';
+---
+
+<section id="features" class="py-20 md:py-32 relative overflow-hidden">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16 md:mb-24">
+      <h2 class="text-3xl md:text-5xl font-black mb-6 font-outfit uppercase tracking-tighter">
+        Potencia tu <span class="text-scalo-accent-cyan">Crecimiento</span>
+      </h2>
+      <p class="max-w-xl mx-auto text-slate-400">
+        Diseñado para escalar. Cada característica está pensada para darte una ventaja competitiva en el mercado actual.
+      </p>
+    </div>
+
+    <!-- React Interactive Bento Grid Island -->
+    <BentoGrid client:visible />
+
+  </div>
+  
+  <!-- Subtle Background Decorations -->
+  <div class="absolute top-1/2 left-0 w-96 h-96 bg-scalo-primary/10 blur-[150px] -z-10 rounded-full"></div>
+  <div class="absolute bottom-0 right-0 w-80 h-80 bg-scalo-accent-cyan/10 blur-[150px] -z-10 rounded-full"></div>
+</section>

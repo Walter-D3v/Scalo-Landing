@@ -1,0 +1,149 @@
+---
+const navLinks = [
+  { name: 'Features', href: '#features' },
+  { name: 'Soluciones', href: '#soluciones' },
+  { name: 'Blog', href: '#blog' },
+];
+---
+
+<header class="fixed top-0 left-0 w-full z-50 px-4 py-4 transition-all duration-300" id="main-header">
+  <div class="max-w-7xl mx-auto relative">
+    <nav class="glass px-6 py-3 rounded-2xl flex items-center justify-between border-white/5 transition-all duration-500 hover:border-white/20 relative z-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 group" aria-label="Volver al inicio">
+        <div class="w-8 h-8 bg-scalo-primary rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.5)] group-hover:scale-110 transition-transform duration-300">
+          <span class="text-white font-bold text-xl" aria-hidden="true">S</span>
+        </div>
+        <span class="text-white font-bold text-2xl tracking-tight font-outfit uppercase">Scalo</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex items-center gap-8" role="menubar">
+        {navLinks.map((link) => (
+          <li role="none">
+            <a 
+              href={link.href} 
+              role="menuitem"
+              class="text-slate-400 hover:text-white font-medium transition-colors duration-200 text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-scalo-primary rounded-md px-2 py-1"
+            >
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="#login" class="text-slate-300 hover:text-white font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-scalo-primary rounded-md px-2 py-1">
+          Log in
+        </a>
+        <button 
+          onclick="window.openLeadModal && window.openLeadModal()" 
+          class="bg-white text-deep-navy px-5 py-2 rounded-xl font-bold text-sm hover:bg-scalo-accent-cyan hover:scale-105 transition-all duration-300 shadow-xl shadow-white/5 hover:shadow-scalo-accent-cyan/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-deep-navy"
+          aria-label="Abre el formulario para empezar ahora"
+        >
+          Empezar Ahora
+        </button>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button 
+        id="mobile-menu-btn" 
+        class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none z-30"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="line1"></span>
+        <span class="w-6 h-0.5 bg-white transition-all duration-200 origin-center" id="line2"></span>
+        <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="line3"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu Drawer -->
+    <div id="mobile-menu-drawer" class="absolute top-2 w-full glass rounded-3xl p-6 pt-24 -translate-y-[120%] opacity-0 transition-all duration-500 z-10 flex flex-col gap-6 shadow-2xl border border-white/10 pointer-events-none pb-8 text-center origin-top">
+      <ul class="flex flex-col gap-6 items-center">
+        {navLinks.map((link) => (
+          <li>
+            <a 
+              href={link.href} 
+              class="mobile-link text-xl text-slate-300 hover:text-white font-bold transition-colors font-outfit uppercase tracking-wider"
+            >
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="h-px w-1/2 mx-auto bg-white/10 my-2"></div>
+      <div class="flex flex-col gap-4 items-center">
+        <a href="#login" class="mobile-link text-slate-400 font-medium hover:text-white transition-colors">Log in</a>
+        <button 
+          onclick="window.openLeadModal && window.openLeadModal(); document.getElementById('mobile-menu-btn')?.click();" 
+          class="w-full bg-scalo-primary text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-scalo-accent-violet transition-colors mt-2"
+        >
+          Empezar Ahora
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Header shrink on scroll
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('py-2');
+    } else {
+      header?.classList.remove('py-2');
+    }
+  });
+
+  // Mobile Menu Logic
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileDrawer = document.getElementById('mobile-menu-drawer');
+  const line1 = document.getElementById('line1');
+  const line2 = document.getElementById('line2');
+  const line3 = document.getElementById('line3');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  
+  let menuOpen = false;
+
+  const toggleMenu = () => {
+    menuOpen = !menuOpen;
+    mobileBtn?.setAttribute('aria-expanded', menuOpen.toString());
+
+    if (menuOpen) {
+      // Menu Open state
+      mobileDrawer?.classList.remove('-translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+      mobileDrawer?.classList.add('translate-y-0', 'opacity-100');
+      
+      // Hamburger to X animation
+      line1?.classList.add('translate-y-2', 'rotate-45');
+      line2?.classList.add('opacity-0');
+      line3?.classList.add('-translate-y-2', '-rotate-45');
+      
+      // Optional: Lock body scroll
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Menu Close state
+      mobileDrawer?.classList.add('-translate-y-[120%]', 'opacity-0', 'pointer-events-none');
+      mobileDrawer?.classList.remove('translate-y-0', 'opacity-100');
+      
+      // X to Hamburger animation
+      line1?.classList.remove('translate-y-2', 'rotate-45');
+      line2?.classList.remove('opacity-0');
+      line3?.classList.remove('-translate-y-2', '-rotate-45');
+      
+      document.body.style.overflow = '';
+    }
+  };
+
+  mobileBtn?.addEventListener('click', toggleMenu);
+  
+  // Close menu when a link inside is clicked
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if(menuOpen) toggleMenu();
+    });
+  });
+</script>

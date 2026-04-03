@@ -1,0 +1,167 @@
+---
+export interface Testimonial {
+  text: string;
+  author: string;
+  role: string;
+  company: string;
+  avatar: string;
+  rating?: number;
+}
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  testimonials: Testimonial[];
+}
+
+const { title, subtitle, testimonials } = Astro.props as Props;
+---
+
+<section id="testimonials" class="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">{title}</h2>
+      {subtitle && <p class="section-subtitle gradient-text-purple">{subtitle}</p>}
+    </div>
+
+    <div class="testimonials-grid">
+      {testimonials.map((testimonial, index) => (
+        <div class="testimonial-card glass reveal" style={`animation-delay: ${index * 0.1}s`}>
+          {testimonial.rating && (
+            <div class="testimonial-rating">
+              {'⭐'.repeat(testimonial.rating)}
+            </div>
+          )}
+          <p class="testimonial-text">"{testimonial.text}"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">{testimonial.avatar}</div>
+            <div class="author-info">
+              <p class="author-name">{testimonial.author}</p>
+              <p class="author-role">
+                {testimonial.role} • {testimonial.company}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonials::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    z-index: 1;
+    position: relative;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonial-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all var(--transition-medium);
+    border: 1px solid var(--glass-light);
+  }
+
+  .testimonial-card:hover {
+    border-color: var(--accent-pink);
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.15);
+    transform: translateY(-8px);
+  }
+
+  .testimonial-rating {
+    font-size: 1.125rem;
+    letter-spacing: 2px;
+  }
+
+  .testimonial-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--primary-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--dark-bg);
+    flex-shrink: 0;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .author-name {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+  }
+
+  .author-role {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
+  @media (max-width: 768px) {
+    .testimonials {
+      padding: 4rem 1rem;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

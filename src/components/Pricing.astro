@@ -1,0 +1,84 @@
+---
+const plans = [
+  {
+    name: 'Starter',
+    price: '0',
+    description: 'Perfecto para individuos y side projects.',
+    features: ['5 Dashboards', '10GB Almacenamiento', 'Soporte vía Email'],
+    buttonText: 'Empezar Gratis',
+    isPro: false
+  },
+  {
+    name: 'Pro',
+    price: '49',
+    description: 'Para equipos en crecimiento que necesitan potencia.',
+    features: ['Dashboards Ilimitados', '100GB Almacenamiento', 'Soporte 24/7 Priority', 'AI Insights Avanzados'],
+    buttonText: 'Prueba Gratis de 14 días',
+    isPro: true
+  },
+  {
+    name: 'Enterprise',
+    price: '99',
+    description: 'Soluciones a medida para grandes organizaciones.',
+    features: ['SLA del 99.9%', 'Almacenamiento Ilimitado', 'Account Manager Dedicado', 'Custom Integrations'],
+    buttonText: 'Contactar Ventas',
+    isPro: false
+  }
+];
+---
+
+<section id="pricing" class="py-20 md:py-32 relative">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-20 animate-reveal opacity-0" style="animation-delay: 0.1s">
+      <h2 class="text-3xl md:text-5xl font-black mb-6 font-outfit uppercase tracking-tighter">
+        Planes <span class="text-scalo-accent-violet">Transparentes</span>
+      </h2>
+      <p class="max-w-xl mx-auto text-slate-400">
+        Escoge el plan que mejor se adapte a tus necesidades. Sin cargos ocultos, sin sorpresas.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+      {plans.map((p, i) => (
+        <div class={`glass-card p-10 rounded-3xl flex flex-col justify-between transition-all duration-500 hover:scale-[1.03] animate-reveal opacity-0 ${p.isPro ? 'border-scalo-primary/30 relative shadow-[0_0_50px_rgba(99,102,241,0.15)] ring-1 ring-white/10' : 'opacity-80 hover:opacity-100'} `} style={`animation-delay: ${0.2 + (i * 0.1)}s`}>
+          
+          {p.isPro && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-scalo-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+              Más Popular
+            </div>
+          )}
+
+          <div>
+            <div class="mb-8">
+              <h3 class="text-2xl font-bold font-outfit mb-2">{p.name}</h3>
+              <div class="flex items-baseline gap-1">
+                <span class="text-4xl font-black font-outfit">${p.price}</span>
+                <span class="text-slate-500 font-medium">/mes</span>
+              </div>
+              <p class="text-slate-400 mt-4 text-sm leading-relaxed">{p.description}</p>
+            </div>
+
+            <ul class="space-y-4 mb-10">
+              {p.features.map((f) => (
+                <li class="flex items-center gap-3 text-sm text-slate-300 font-medium">
+                  <div class="w-5 h-5 bg-scalo-primary/10 rounded-full flex items-center justify-center text-[10px] text-scalo-primary">✓</div>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <a 
+            href={`#${p.name.toLowerCase()}`} 
+            class={`w-full py-4 rounded-2xl font-bold text-center transition-all duration-300 ${p.isPro ? 'bg-scalo-primary text-white hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]' : 'glass hover:bg-white/10'}`}
+          >
+            {p.buttonText}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+  
+  <!-- Subtle Gradient Background for Pricing -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-96 bg-scalo-accent-violet/5 blur-[150px] -z-10 rounded-full"></div>
+</section>

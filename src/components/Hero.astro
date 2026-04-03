@@ -1,0 +1,107 @@
+---
+import AnimatedHeroCharts from './react/AnimatedHeroCharts';
+---
+
+<section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+  <!-- Glowing backgrounds -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-scalo-primary/30 blur-[120px] -z-10 rounded-full animate-glow opacity-50"></div>
+  <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-scalo-accent-violet/20 blur-[100px] -z-10 rounded-full animate-float opacity-30"></div>
+
+  <div class="container mx-auto px-6 relative z-10 text-center">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 mb-8 animate-reveal opacity-0" style="animation-delay: 0.1s">
+      <span class="flex h-2 w-2 rounded-full bg-scalo-accent-cyan animate-pulse"></span>
+      <span class="text-xs font-bold text-scalo-accent-cyan tracking-wider uppercase">Nueva Versión 2.0</span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-[1.1] animate-reveal opacity-0 tracking-tighter" style="animation-delay: 0.2s">
+      <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/40 drop-shadow-sm font-outfit">
+        Decisiones Inteligentes <br />
+      </span>
+      <span class="bg-clip-text text-transparent bg-gradient-to-r from-scalo-primary via-scalo-accent-violet to-scalo-accent-cyan animate-gradient-slow bg-[length:200%_200%]">
+        en Tiempo Real
+      </span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-10 leading-relaxed animate-reveal opacity-0" style="animation-delay: 0.3s">
+      Optimiza tu flujo de trabajo con la plataforma de análisis más avanzada. 
+      Visualiza, predice y escala tu negocio con Scalo.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-reveal opacity-0" style="animation-delay: 0.4s">
+      <button 
+        onclick="window.openLeadModal && window.openLeadModal()" 
+        class="w-full sm:w-auto bg-scalo-primary text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-deep-navy"
+        aria-label="Abre el formulario para comenzar gratis"
+      >
+        Comenzar Gratis
+      </button>
+      <a 
+        href="#demo" 
+        class="w-full sm:w-auto glass text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/10 transition-all duration-300"
+      >
+        Ver Demo
+      </a>
+    </div>
+
+    <!-- React Interactive Dashboard Island -->
+    <AnimatedHeroCharts client:load />
+
+  </div>
+</section>
+
+ 
+
+<script>
+  // Number Counter Animation Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const animateValue = (obj: Element, start: number, end: number, duration: number, isDecimal: boolean) => {
+      let startTimestamp: number | null = null;
+      const step = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        // Easing out function
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentVal = start + easeOut * (end - start);
+        
+        if (isDecimal) {
+            obj.innerHTML = currentVal.toFixed(1);
+        } else {
+            obj.innerHTML = Math.floor(currentVal).toString();
+        }
+        
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const targetStr = (entry.target as HTMLElement).dataset.target;
+          if (targetStr) {
+            const targetVal = parseFloat(targetStr);
+            const isDecimal = entry.target.classList.contains('animated-decimal');
+            animateValue(entry.target, 0, targetVal, 2000, isDecimal);
+          }
+          // Unobserve after animating once
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animated-counter, .animated-decimal').forEach(counter => {
+      counterObserver.observe(counter);
+    });
+  });
+</script>

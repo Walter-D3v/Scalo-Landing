@@ -1,0 +1,199 @@
+---
+export interface Step {
+  number: string;
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  steps: Step[];
+}
+
+const { title, subtitle, description, steps } = Astro.props as Props;
+---
+
+<section id="how" class="how-works">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">{title}</h2>
+      {subtitle && <p class="section-subtitle gradient-text-cyan">{subtitle}</p>}
+      {description && <p class="section-description">{description}</p>}
+    </div>
+
+    <div class="steps-container">
+      {steps.map((step, index) => (
+        <div class="step-card reveal" style={`animation-delay: ${index * 0.15}s`}>
+          <div class="step-number glass-light">{step.number}</div>
+          <div class="step-content">
+            <h3 class="step-title">{step.title}</h3>
+            <p class="step-description">{step.description}</p>
+          </div>
+          {index < steps.length - 1 && (
+            <div class="step-arrow">→</div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-works {
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .how-works::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -20%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    z-index: 1;
+    position: relative;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .steps-container {
+    display: grid;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-card {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+    background: var(--glass-light);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-light);
+    border-radius: 16px;
+    transition: all var(--transition-medium);
+    position: relative;
+  }
+
+  .step-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+    border-radius: 16px;
+  }
+
+  .step-card:hover::before {
+    opacity: 1;
+  }
+
+  .step-card:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+    transform: translateX(10px);
+  }
+
+  .step-number {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(99, 102, 241, 0.15) 100%);
+    border-radius: 12px;
+    color: var(--accent-cyan);
+    flex-shrink: 0;
+  }
+
+  .step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .step-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .step-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .step-arrow {
+    position: absolute;
+    left: 50%;
+    bottom: -50px;
+    font-size: 2rem;
+    color: var(--accent-cyan);
+    opacity: 0.6;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .step-card:last-child .step-arrow {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .how-works {
+      padding: 4rem 1rem;
+    }
+
+    .step-card {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      font-size: 1.25rem;
+    }
+
+    .step-arrow {
+      transform: translateX(-50%) rotate(0deg);
+      bottom: -40px;
+      left: 50%;
+    }
+  }
+</style>
