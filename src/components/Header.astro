@@ -16,179 +16,44 @@ const {
 } = Astro.props as Props;
 ---
 
-<header class="header glass">
-  <nav class="nav-wrapper">
-    <div class="nav-container">
-      <a href="#hero" class="logo">
-        <span class="logo-icon">◆</span>
-        <span class="logo-text">{title}</span>
+<header class="sticky top-0 z-[1000] mb-8 glass">
+  <nav class="py-4">
+    <div class="flex items-center justify-between gap-4 md:gap-8 max-w-[1200px] mx-auto px-4 md:px-6">
+      <a href="#hero" class="flex items-center gap-2 text-xl font-bold text-white no-underline transition-all duration-200 hover:opacity-80">
+        <img src="/Scalo-logoWhite.png" alt="Scalo" class="h-10 w-auto" />
       </a>
       
-      <ul class="nav-links">
+      <ul class="hidden sm:flex list-none gap-4 md:gap-8 items-center text-[0.95rem] md:text-base nav-links">
         {navItems.map((item) => (
           <li>
-            <a href={item.href} class="nav-link">{item.label}</a>
+            <a 
+              href={item.href} 
+              class="text-slate-400 no-underline font-medium transition-colors duration-200 relative group hover:text-white"
+            >
+              {item.label}
+              <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-scalo-accent-cyan to-scalo-primary-light transition-all duration-200 group-hover:w-full"></span>
+            </a>
           </li>
         ))}
       </ul>
       
-      <div class="nav-actions">
-        <button class="btn btn-secondary" onclick="switchTheme()">
-          <span class="icon">☀️</span>
+      <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center">
+        <button class="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-sm sm:text-base hidden sm:block" onclick="switchTheme()" aria-label="Toggle Theme">
+          <span>☀️</span>
         </button>
-        <a href="#pricing" class="btn btn-primary">
+        <a href="#pricing" class="px-4 py-2 sm:px-6 sm:py-3 rounded-xl bg-scalo-primary text-white font-bold text-sm sm:text-base hover:bg-scalo-primary-light transition-colors shadow-lg shadow-scalo-primary/20">
           Empezar ahora
         </a>
       </div>
 
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="flex sm:hidden flex-col gap-1.5 bg-transparent border-none cursor-pointer" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span class="w-6 h-[2.5px] bg-white rounded-sm transition-all duration-200"></span>
+        <span class="w-6 h-[2.5px] bg-white rounded-sm transition-all duration-200"></span>
+        <span class="w-6 h-[2.5px] bg-white rounded-sm transition-all duration-200"></span>
       </button>
     </div>
   </nav>
 </header>
-
-<style>
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    margin-bottom: 2rem;
-  }
-
-  .nav-wrapper {
-    padding: 1rem 0;
-  }
-
-  .nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-decoration: none;
-    color: var(--text-primary);
-    transition: all var(--transition-fast);
-  }
-
-  .logo-icon {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--primary-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: rotate 20s linear infinite;
-  }
-
-  @keyframes rotate {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(180deg); }
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .nav-link {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all var(--transition-fast);
-    position: relative;
-  }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-cyan), var(--primary-light));
-    transition: width var(--transition-fast);
-  }
-
-  .nav-link:hover {
-    color: var(--text-primary);
-  }
-
-  .nav-link:hover::after {
-    width: 100%;
-  }
-
-  .nav-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 0.4rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .mobile-menu-toggle span {
-    width: 24px;
-    height: 2.5px;
-    background: var(--text-primary);
-    border-radius: 2px;
-    transition: all var(--transition-fast);
-  }
-
-  @media (max-width: 768px) {
-    .nav-container {
-      gap: 1rem;
-    }
-
-    .nav-links {
-      gap: 1rem;
-      font-size: 0.95rem;
-    }
-
-    .mobile-menu-toggle {
-      display: flex;
-    }
-
-    .nav-actions {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .nav-actions .btn {
-      padding: 10px 16px;
-      font-size: 0.9rem;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .nav-links {
-      display: none;
-    }
-
-    .nav-container {
-      padding: 0 1rem;
-    }
-  }
-</style>
 
 <script>
   function switchTheme() {
@@ -201,7 +66,13 @@ const {
     toggle.addEventListener('click', () => {
       const nav = document.querySelector('.nav-links') as HTMLElement | null;
       if (nav) {
-        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        if (nav.classList.contains('hidden')) {
+          nav.classList.remove('hidden');
+          nav.classList.add('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'w-full', 'glass', 'p-4', 'gap-4');
+        } else {
+          nav.classList.add('hidden');
+          nav.classList.remove('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'w-full', 'glass', 'p-4', 'gap-4');
+        }
       }
     });
   }

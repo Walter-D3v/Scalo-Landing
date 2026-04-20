@@ -7,17 +7,17 @@ const steps = [
   {
     icon: <Database className="w-6 h-6 text-scalo-primary" />,
     title: "1. Conecta tus datos",
-    description: "Vincula SQL, Excel, CRMs o herramientas de pauta en 2 clics. Sin código, sin configuraciones complejas."
+    description: "Scalo se integra con lo que ya usas: Excel, tu CRM, tu sistema de ventas o ERP. En minutos, no semanas."
   },
   {
     icon: <Zap className="w-6 h-6 text-scalo-accent-violet" />,
-    title: "2. Motor de Inteligencia",
-    description: "Nuestra IA cruza variables, limpia impurezas y busca correlaciones de forma autónoma en el fondo."
+    title: "2. Scalo lo analiza",
+    description: "La plataforma procesa, ordena y cruza tu información automáticamente. Detecta patrones y oportunidades que nadie ve a mano."
   },
   {
     icon: <PieChart className="w-6 h-6 text-scalo-accent-cyan" />,
-    title: "3. Estrategia Instantánea",
-    description: "Obtén un dashboard vivo con alertas y predicciones. Tu única tarea es decidir el próximo movimiento."
+    title: "3. Tú accionas",
+    description: 'Recibes recomendaciones claras con impacto estimado. Sin interpretación. Solo: "haz esto para crecer más".'
   }
 ];
 

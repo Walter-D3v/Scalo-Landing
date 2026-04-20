@@ -1,33 +1,58 @@
 ---
 import AnimatedHeroCharts from './react/AnimatedHeroCharts';
+import Grainient from './react/Grainient-JS-CSS';
 ---
 
 <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-  <!-- Glowing backgrounds -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-scalo-primary/30 blur-[120px] -z-10 rounded-full animate-glow opacity-50"></div>
-  <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-scalo-accent-violet/20 blur-[100px] -z-10 rounded-full animate-float opacity-30"></div>
+  <!-- Interactive Background from ReactBits -->
+  <div class="absolute inset-0 z-[-15] pointer-events-none">
+    <Grainient
+      client:load
+      color1="#260947"
+      color2="#5d3497"
+      color3="#3b175f"
+      timeSpeed={0.8}
+      colorBalance={0}
+      warpStrength={1}
+      warpFrequency={5}
+      warpSpeed={2}
+      warpAmplitude={50}
+      blendAngle={0}
+      blendSoftness={0.05}
+      rotationAmount={500}
+      noiseScale={2}
+      grainAmount={0.1}
+      grainScale={2}
+      grainAnimated={false}
+      contrast={1.5}
+      gamma={1}
+      saturation={1}
+      centerX={0}
+      centerY={0}
+      zoom={0.75}
+    />
+  </div>
 
   <div class="container mx-auto px-6 relative z-10 text-center">
     <!-- Badge -->
     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 mb-8 animate-reveal opacity-0" style="animation-delay: 0.1s">
       <span class="flex h-2 w-2 rounded-full bg-scalo-accent-cyan animate-pulse"></span>
-      <span class="text-xs font-bold text-scalo-accent-cyan tracking-wider uppercase">Nueva Versión 2.0</span>
+      <span class="text-xs font-bold text-scalo-accent-cyan tracking-wider uppercase">Proximamente en beta privada</span>
     </div>
 
     <!-- Title -->
-    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-[1.1] animate-reveal opacity-0 tracking-tighter" style="animation-delay: 0.2s">
-      <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/40 drop-shadow-sm font-outfit">
-        Decisiones Inteligentes <br />
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-[1.1] animate-reveal opacity-0 tracking-normal" style="animation-delay: 0.2s">
+      <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/40 drop-shadow-sm">
+        Los datos no escalan empresas. <br />
       </span>
       <span class="bg-clip-text text-transparent bg-gradient-to-r from-scalo-primary via-scalo-accent-violet to-scalo-accent-cyan animate-gradient-slow bg-[length:200%_200%]">
-        en Tiempo Real
+        Las decisiones sí.
       </span>
     </h1>
 
     <!-- Subtitle -->
     <p class="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-10 leading-relaxed animate-reveal opacity-0" style="animation-delay: 0.3s">
-      Optimiza tu flujo de trabajo con la plataforma de análisis más avanzada. 
-      Visualiza, predice y escala tu negocio con Scalo.
+      <b>Scalo</b> centraliza la información de tu empresa, <b>detecta oportunidades automáticamente</b> y te dice exactamente <b>qué hacer para crecer</b>.
     </p>
 
     <!-- CTAs -->

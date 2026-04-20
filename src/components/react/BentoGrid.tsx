@@ -7,45 +7,45 @@ import { BarChart2, BrainCircuit, BellRing, Link as LinkIcon, CandlestickChart, 
 const features = [
   {
     icon: <BarChart2 className="w-8 h-8 text-scalo-primary" />,
-    title: 'Dashboard Inteligente',
-    description: 'Visualiza todos tus datos en tiempo real con interfaces intuitivas y gráficos dinámicos que reaccionan instantáneamente.',
+    title: 'Dashboard de negocio unificado',
+    description: 'Una vista completa y en tiempo real de tu empresa. Ventas, rentabilidad, operaciones y clientes en una sola pantalla.',
     badge: 'Core Feature',
     colSpan: 'md:col-span-2',
     gradient: 'from-scalo-primary/20 to-transparent'
   },
   {
     icon: <BrainCircuit className="w-8 h-8 text-scalo-accent-violet" />,
-    title: 'Análisis IA',
-    description: 'Machine learning automático que detecta patrones y anomalías ocultas en tus datos.',
+    title: 'Recomendaciones Inteligentes',
+    description: 'Scalo no solo muestra números. Te dice qué hacer, con qué prioridad y cuál es el impacto esperado en tus resultados.',
     badge: 'AI-Powered',
     colSpan: 'col-span-1',
     gradient: 'from-scalo-accent-violet/20 to-transparent'
   },
   {
     icon: <BellRing className="w-8 h-8 text-amber-400" />,
-    title: 'Alertas Automáticas',
-    description: 'Recibe notificaciones inteligentes cuando algo importante ocurre en tu negocio.',
+    title: 'Recomendaciones automáticas',
+    description: 'La plataforma te avisa cuando algo importante cambia: una caída en ventas, una oportunidad emergente o un proceso que está fallando.',
     colSpan: 'col-span-1',
     gradient: 'from-amber-400/20 to-transparent'
   },
   {
     icon: <LinkIcon className="w-8 h-8 text-emerald-400" />,
-    title: 'Integraciones Fluidas',
-    description: 'Conecta con Excel, SQL, APIs externas y tus herramientas favoritas en minutos. Sin código.',
+    title: 'Integración con tus herramientas',
+    description: 'Conecta Excel, Google Sheets, tu CRM o ERP. Scalo trabaja con lo que ya tienes, sin reemplazar nada.',
     colSpan: 'md:col-span-2',
     gradient: 'from-emerald-400/20 to-transparent'
   },
   {
     icon: <CandlestickChart className="w-8 h-8 text-scalo-accent-cyan" />,
-    title: 'Predicciones Precisas',
-    description: 'Modelos predictivos que te ayudan a anticipar tendencias del mercado antes de que ocurran.',
+    title: 'Reportes accionables',
+    description: 'Olvídate de reportes que nadie lee. Cada informe de Scalo termina con una lista de acciones concretas y medibles.',
     colSpan: 'md:col-span-2',
     gradient: 'from-scalo-accent-cyan/20 to-transparent'
   },
   {
     icon: <ShieldCheck className="w-8 h-8 text-rose-400" />,
-    title: 'Seguridad Enterprise',
-    description: 'Encriptación end-to-end militar, cumplimiento GDPR y control total.',
+    title: 'Score de salud del negocio',
+    description: 'Un número que resume el estado de tu empresa en 5 dimensiones clave. Fácil de entender, fácil de mejorar.',
     colSpan: 'col-span-1',
     gradient: 'from-rose-400/20 to-transparent'
   }
