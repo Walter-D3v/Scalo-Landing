@@ -1,108 +1,144 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Star, MessageSquareQuote } from 'lucide-react';
-import { cn } from '../../lib/utils';
+import React from 'react';
+import { Star, Quote } from 'lucide-react';
 
+// ─── Data ────────────────────────────────────────────────────────────────────
 const testimonials = [
   {
-    author: "Carlos Méndez",
-    role: "CTO, TechVenture",
-    feedback: "Movernos a Scalo fue la decisión más rentable del trimestre. El análisis predictivo nos salvó de una caída de retención del 15%. La forma en que dibuja los insights en tiempo real parece mágica.",
+    author: 'Carlos Méndez',
+    role: 'CTO, TechVenture',
+    feedback: 'Movernos a Scalo fue la decisión más rentable del trimestre. El análisis predictivo nos salvó de una caída de retención del 15%.',
     rating: 5,
-    gradient: "from-scalo-primary/20"
+    accent: '#6366f1',
+    initials: 'CM',
   },
   {
-    author: "Sofía Laurent",
-    role: "VP de Growth, Horizon",
-    feedback: "Antes tardábamos días en cruzar datos de 5 plataformas distintas. Ahora con las Integraciones Fluidas tenemos un único panel de control que nuestro equipo comercial entiende a la primera.",
+    author: 'Sofía Laurent',
+    role: 'VP de Growth, Horizon',
+    feedback: 'Antes tardábamos días en cruzar datos de 5 plataformas distintas. Ahora tenemos un único panel que nuestro equipo entiende a la primera.',
     rating: 5,
-    gradient: "from-scalo-accent-cyan/20"
+    accent: '#06b6d4',
+    initials: 'SL',
   },
   {
-    author: "David Ruiz",
-    role: "Founder, DataFlow",
-    feedback: "He probado todas las herramientas del mercado. Ninguna se siente tan 'viva' como Scalo. Las alertas nos mantienen a la vanguardia antes de que los problemas escalen.",
+    author: 'David Ruiz',
+    role: 'Founder, DataFlow',
+    feedback: 'He probado todas las herramientas del mercado. Ninguna se siente tan viva como Scalo. Las alertas nos mantienen un paso adelante siempre.',
     rating: 5,
-    gradient: "from-scalo-accent-violet/20"
-  }
+    accent: '#8b5cf6',
+    initials: 'DR',
+  },
+  {
+    author: 'Ana Torres',
+    role: 'Head of Finance, Nexus',
+    feedback: 'El dashboard de liquidez nos dio visibilidad que antes simplemente no teníamos. Identificamos un riesgo crítico en menos de 48 horas.',
+    rating: 5,
+    accent: '#06b6d4',
+    initials: 'AT',
+  },
+  {
+    author: 'Miguel Ángel Fuentes',
+    role: 'CEO, Escala Labs',
+    feedback: 'Scalo reemplazó tres herramientas distintas que usábamos. El ROI fue inmediato. No puedo imaginar operar sin él ahora.',
+    rating: 5,
+    accent: '#6366f1',
+    initials: 'MF',
+  },
+  {
+    author: 'Laura Vásquez',
+    role: 'COO, PivotHub',
+    feedback: 'La integración con nuestro ERP fue sorprendentemente fluida. En dos días ya teníamos insights accionables corriendo automáticamente.',
+    rating: 5,
+    accent: '#8b5cf6',
+    initials: 'LV',
+  },
 ];
 
-export default function TestimonialAccordion() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
+// Duplicate for seamless loop
+const row1 = [...testimonials, ...testimonials];
+const row2 = [...testimonials.slice(3), ...testimonials.slice(0, 3), ...testimonials.slice(3), ...testimonials.slice(0, 3)];
 
-  const toggleAccordion = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
-
+// ─── Single Card ─────────────────────────────────────────────────────────────
+function TestimonialCard({ item }: { item: typeof testimonials[number] }) {
   return (
-    <div className="w-full max-w-3xl mx-auto flex flex-col gap-4">
-      {testimonials.map((item, index) => {
-        const isExpanded = expandedIndex === index;
-        
-        return (
-          <motion.div 
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={cn(
-              "glass rounded-2xl border border-white/5 overflow-hidden transition-colors duration-300",
-              isExpanded ? "border-white/10 shadow-[0_0_30px_rgba(99,102,241,0.1)]" : "hover:border-white/10"
-            )}
-          >
-            {/* Header (Always Visible) */}
-            <button 
-              onClick={() => toggleAccordion(index)}
-              className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
-            >
-              <div className="flex items-center gap-4">
-                <div className={cn(
-                  "w-12 h-12 rounded-full bg-gradient-to-br to-transparent flex items-center justify-center border border-white/10",
-                  item.gradient
-                )}>
-                  <MessageSquareQuote className="w-5 h-5 text-white/80" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-white font-outfit">{item.author}</h4>
-                  <p className="text-sm text-slate-400">{item.role}</p>
-                </div>
-              </div>
-              <motion.div 
-                animate={{ rotate: isExpanded ? 180 : 0 }}
-                transition={{ duration: 0.3, type: "spring", stiffness: 200, damping: 20 }}
-                className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-slate-400"
-              >
-                <ChevronDown className="w-4 h-4" />
-              </motion.div>
-            </button>
+    <div
+      className="relative flex-shrink-0 w-80 p-5 rounded-2xl border border-white/8 bg-white/[0.04] backdrop-blur-xl mx-3 group cursor-default"
+      style={{ boxShadow: `0 0 0 1px ${item.accent}18` }}
+    >
+      {/* Accent glow on hover */}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse at top left, ${item.accent}14, transparent 65%)` }}
+      />
 
-            {/* Expandable Content */}
-            <AnimatePresence initial={false}>
-              {isExpanded && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4, type: "spring", stiffness: 100, damping: 15 }}
-                >
-                  <div className="px-6 pb-6 pt-2">
-                    <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4"></div>
-                    <p className="text-slate-300 leading-relaxed text-[15px] italic">
-                      "{item.feedback}"
-                    </p>
-                    <div className="flex gap-1 mt-4">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        );
-      })}
+      {/* Quote icon */}
+      <Quote
+        className="absolute top-4 right-4 w-6 h-6 opacity-10"
+        style={{ color: item.accent }}
+      />
+
+      {/* Stars */}
+      <div className="flex gap-0.5 mb-3">
+        {Array.from({ length: item.rating }).map((_, i) => (
+          <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+        ))}
+      </div>
+
+      {/* Feedback */}
+      <p className="text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
+        "{item.feedback}"
+      </p>
+
+      {/* Author */}
+      <div className="flex items-center gap-3 mt-auto">
+        <div
+          className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+          style={{ background: `linear-gradient(135deg, ${item.accent}60, ${item.accent}20)`, border: `1px solid ${item.accent}40` }}
+        >
+          {item.initials}
+        </div>
+        <div>
+          <p className="text-white font-semibold text-xs leading-tight">{item.author}</p>
+          <p className="text-slate-500 text-[11px]">{item.role}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Pausable marquee using CSS animation ────────────────────────────────────
+function CSSMarqueeRow({
+  items,
+  reverse = false,
+}: {
+  items: typeof testimonials;
+  reverse?: boolean;
+}) {
+  return (
+    <div className="overflow-hidden relative group/row">
+      {/* Edge fades */}
+      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0B0B0F] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0B0B0F] to-transparent z-10 pointer-events-none" />
+
+      <div
+        className={`flex py-3 ${
+          reverse ? 'animate-marquee-reverse' : 'animate-marquee'
+        } group-hover/row:[animation-play-state:paused]`}
+        style={{ width: 'max-content' }}
+      >
+        {items.map((item, i) => (
+          <TestimonialCard key={i} item={item} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+export default function TestimonialCarousel() {
+  return (
+    <div className="flex flex-col gap-5 py-4 overflow-hidden">
+      <CSSMarqueeRow items={row1} reverse={false} />
+      <CSSMarqueeRow items={row2} reverse={true} />
     </div>
   );
 }
