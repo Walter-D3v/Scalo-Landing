@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NavBar from '../../components/NavBar.astro';
+import Footer from '../../components/Footer.astro';
+import AnimatedBlog from '../../components/react/AnimatedBlog';
+import { getPosts } from '../../lib/content-island';
+
+const posts = await getPosts(9);
+---
+
+<Layout
+  title="Blog — Scalo"
+  description="Insights del mercado, casos de estudio y guías técnicas para dominar tus datos."
+>
+  <NavBar />
+
+  <main class="pt-32 pb-8 min-h-screen">
+    <!-- Hero del blog -->
+    <div class="container mx-auto px-6 max-w-6xl text-center mb-8">
+      <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter mb-4">
+        El <span class="text-scalo-primary">Blog</span>
+      </h1>
+      <p class="text-slate-400 text-lg max-w-xl mx-auto">
+        Insights del mercado, casos de estudio y guías técnicas para dominar tus datos.
+      </p>
+    </div>
+  </main>
+
+  <!-- Blog grid completo (client:visible para lazy hydration) -->
+  <AnimatedBlog client:visible posts={posts} />
+
+  <Footer />
+</Layout>

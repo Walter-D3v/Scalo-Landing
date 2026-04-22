@@ -1,5 +1,5 @@
 ---
-import AnimatedHeroCharts from './react/AnimatedHeroCharts';
+import InsightCards from './react/InsightCards';
 import Grainient from './react/Grainient-JS-CSS';
 ---
 
@@ -7,7 +7,7 @@ import Grainient from './react/Grainient-JS-CSS';
   <!-- Interactive Background from ReactBits -->
   <div class="absolute inset-0 z-[-15] pointer-events-none">
     <Grainient
-      client:load
+      client:idle
       color1="#260947"
       color2="#5d3497"
       color3="#3b175f"
@@ -21,7 +21,7 @@ import Grainient from './react/Grainient-JS-CSS';
       blendSoftness={0.05}
       rotationAmount={500}
       noiseScale={2}
-      grainAmount={0.1}
+      grainAmount={0}
       grainScale={2}
       grainAnimated={false}
       contrast={1.5}
@@ -73,7 +73,7 @@ import Grainient from './react/Grainient-JS-CSS';
     </div>
 
     <!-- React Interactive Dashboard Island -->
-    <AnimatedHeroCharts client:load />
+    <InsightCards client:visible />
 
   </div>
 </section>

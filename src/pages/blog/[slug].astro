@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NavBar from '../../components/NavBar.astro';
+import Footer from '../../components/Footer.astro';
+import { getAllPostSlugs, getPostBySlug, normalizeUrl } from '../../lib/content-island';
+
+export async function getStaticPaths() {
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const post = await getPostBySlug(slug as string);
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+
+const { title, excerpt, Body_content, CoverImage, PublishedAt, Author, Category } = post;
+const imageUrl = normalizeUrl(CoverImage);
+const date = PublishedAt
+  ? new Date(PublishedAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })
+  : null;
+---
+
+<Layout title={`${title} — Scalo Blog`} description={excerpt}>
+  <NavBar />
+
+  <main class="pt-32 pb-24 min-h-screen">
+    <div class="container mx-auto px-6 max-w-3xl">
+
+      <!-- Back link -->
+      <a href="/blog" class="inline-flex items-center gap-2 text-slate-400 hover:text-white text-sm font-medium mb-10 transition-colors group">
+        ← Volver al blog
+      </a>
+
+      <!-- Category + date -->
+      <div class="flex items-center gap-3 mb-5">
+        {Category && (
+          <span class="px-3 py-1 bg-scalo-primary/10 border border-scalo-primary/30 text-scalo-primary rounded-full text-xs font-bold uppercase tracking-widest">
+            {Category.name}
+          </span>
+        )}
+        {date && <span class="text-slate-500 text-sm">{date}</span>}
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-6 tracking-tight">
+        {title}
+      </h1>
+
+      <!-- Author -->
+      {Author && (
+        <div class="flex items-center gap-3 mb-10 pb-10 border-b border-white/10">
+          {normalizeUrl(Author.avatar) && (
+            <img src={normalizeUrl(Author.avatar)} alt={Author.name}
+              class="w-10 h-10 rounded-full object-cover border border-white/10" loading="lazy" />
+          )}
+          <div>
+            <p class="text-white font-semibold text-sm">{Author.name}</p>
+            {Author.bio && <p class="text-slate-500 text-xs">{Author.bio}</p>}
+          </div>
+          {Author.LinkedIn && (
+            <a href={normalizeUrl(Author.LinkedIn)} target="_blank" rel="noopener noreferrer"
+              class="ml-auto text-xs text-slate-400 hover:text-white transition-colors border border-white/10 px-3 py-1 rounded-full">
+              LinkedIn →
+            </a>
+          )}
+        </div>
+      )}
+
+      <!-- Cover image -->
+      {imageUrl && (
+        <div class="w-full aspect-video rounded-2xl overflow-hidden mb-10 border border-white/5">
+          <img src={imageUrl} alt={title} class="w-full h-full object-cover" loading="eager" />
+        </div>
+      )}
+
+      <!-- Body content -->
+      <article class="prose prose-invert prose-slate max-w-none
+        prose-headings:font-bold prose-headings:tracking-tight
+        prose-a:text-scalo-accent-cyan prose-a:no-underline hover:prose-a:underline
+        prose-strong:text-white
+        prose-code:text-scalo-accent-violet prose-code:bg-white/5 prose-code:px-1 prose-code:rounded
+        prose-img:rounded-2xl prose-img:border prose-img:border-white/10
+      ">
+        <Fragment set:html={Body_content?.replace(/\n/g, '<br />') ?? ''} />
+      </article>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

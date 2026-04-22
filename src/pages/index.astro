@@ -8,6 +8,9 @@ import HowItWorksSteps from '../components/react/HowItWorksSteps';
 import AnimatedBlog from '../components/react/AnimatedBlog';
 import Footer from '../components/Footer.astro';
 import TestimonialAccordion from '../components/react/TestimonialAccordion';
+import { getFeaturedPosts } from '../lib/content-island';
+
+const blogPosts = await getFeaturedPosts(3);
 ---
 
 <Layout title="Scalo - Business Intelligence de Próxima Generación">
@@ -44,7 +47,7 @@ import TestimonialAccordion from '../components/react/TestimonialAccordion';
     </section>
 
     <!-- Blog Section instead of Pricing -->
-    <AnimatedBlog client:visible />
+    <AnimatedBlog client:visible posts={blogPosts} />
     
     <!-- CTA Middle Section -->
     <section class="py-20 relative overflow-hidden">
