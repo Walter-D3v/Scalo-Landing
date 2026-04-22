@@ -74,7 +74,7 @@ export default function BentoGrid() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr"
+        className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-fr"
       >
         {features.map((feature, index) => (
           <motion.div 
@@ -91,7 +91,7 @@ export default function BentoGrid() {
               gyroscope={true}
               className="h-full"
             >
-              <div className="glass h-full p-8 rounded-3xl border border-white/5 hover:border-white/10 transition-colors relative overflow-hidden group flex flex-col justify-between">
+              <div className="glass h-full p-6 md:p-8 rounded-3xl border border-white/5 hover:border-white/10 transition-colors relative overflow-hidden group flex flex-col justify-between">
                 
                 {/* Dynamic Background Glow on Hover */}
                 <div className={cn(
@@ -111,7 +111,7 @@ export default function BentoGrid() {
                     )}
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-white mb-3 font-outfit tracking-tight">
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-3 font-outfit tracking-tight leading-snug">
                     {feature.title}
                   </h3>
                   <p className="text-slate-400 leading-relaxed text-sm">

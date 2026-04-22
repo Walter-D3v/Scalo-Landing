@@ -226,7 +226,7 @@ function InsightCardItem({ card, index }: { card: InsightCard; index: number }) 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function InsightCards() {
   return (
-    <div className="w-full max-w-4xl mx-auto mt-16 flex flex-col gap-5">
+    <div className="w-full max-w-4xl mx-auto mt-8 sm:mt-16 flex flex-col gap-4">
       {/* Tag line */}
       <motion.p
         initial={{ opacity: 0, y: 10 }}

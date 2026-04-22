@@ -42,7 +42,7 @@ export default function HowItWorksSteps() {
 
       <div className="relative">
         {/* Animated Connecting Line */}
-        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block">
+        <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 block">
            <motion.div 
              className="absolute top-0 w-full bg-gradient-to-b from-scalo-primary via-scalo-accent-violet to-scalo-accent-cyan" 
              style={{ height: lineHeight }}
