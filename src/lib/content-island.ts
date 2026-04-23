@@ -139,9 +139,25 @@ export async function getAllPostSlugs(): Promise<string[]> {
   try {
     const posts = await client.getContentList<CIPost>({
       contentType: 'Post',
+      includeRelatedContent: true,
       pagination: { take: 1000 },
     });
-    return posts.map((p) => p.slug).filter(Boolean);
+
+    // Debug: log the first post shape to detect field names
+    if (posts.length > 0) {
+      console.log('[content-island] getAllPostSlugs sample post keys:', Object.keys(posts[0]));
+      console.log('[content-island] getAllPostSlugs sample post:', JSON.stringify(posts[0]).substring(0, 300));
+    }
+
+    const slugs = posts
+      .map((p: any) => {
+        // Try common field name variants returned by Content Island
+        return p.slug ?? p.Slug ?? p['fields.slug'] ?? p.fields?.slug ?? null;
+      })
+      .filter(Boolean) as string[];
+
+    console.log('[content-island] getAllPostSlugs found slugs:', slugs);
+    return slugs;
   } catch (err: any) {
     console.warn('[content-island] getAllPostSlugs falló:', err?.message ?? err);
     return [];

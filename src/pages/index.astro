@@ -8,9 +8,24 @@ import HowItWorksSteps from '../components/react/HowItWorksSteps';
 import AnimatedBlog from '../components/react/AnimatedBlog';
 import Footer from '../components/Footer.astro';
 import TestimonialAccordion from '../components/react/TestimonialAccordion';
-import { getFeaturedPosts } from '../lib/content-island';
+import { getFeaturedPosts, getOpinions, normalizeUrl } from '../lib/content-island';
 
 const blogPosts = await getFeaturedPosts(3);
+const rawOpinions = await getOpinions(6);
+
+const colors = ['#6366f1', '#06b6d4', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
+
+const testimonials = rawOpinions.length > 0 
+  ? rawOpinions.map((op, index) => ({
+      author: op.name,
+      role: op.source || '',
+      feedback: op.content,
+      rating: op.ranking || 5,
+      accent: colors[index % colors.length],
+      initials: op.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase(),
+      avatar: normalizeUrl(op.avatar),
+    }))
+  : undefined;
 ---
 
 <Layout title="Scalo - Business Intelligence de Próxima Generación">
@@ -43,7 +58,7 @@ const blogPosts = await getFeaturedPosts(3);
       </div>
 
       <!-- Full-bleed marquee (no px container) -->
-      <TestimonialAccordion client:visible />
+      <TestimonialAccordion client:visible testimonials={testimonials} />
 
       <!-- Glow -->
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-scalo-accent-violet/5 blur-[120px] -z-10 rounded-full pointer-events-none"></div>
