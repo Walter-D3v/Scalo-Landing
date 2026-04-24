@@ -14,20 +14,84 @@ const posts = await getPosts(9);
 >
   <NavBar />
 
-  <main class="pt-32 pb-8 min-h-screen">
-    <!-- Hero del blog -->
-    <div class="container mx-auto px-6 max-w-6xl text-center mb-8">
-      <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter mb-4">
-        El <span class="text-scalo-primary">Blog</span>
-      </h1>
-      <p class="text-slate-400 text-lg max-w-xl mx-auto">
-        Insights del mercado, casos de estudio y guías técnicas para dominar tus datos.
-      </p>
-    </div>
-  </main>
+  <main class="min-h-screen">
 
-  <!-- Blog grid completo (client:visible para lazy hydration) -->
-  <AnimatedBlog client:visible posts={posts} />
+    <!-- ═══════════════════════════════════════════════════════════
+         BLOG HERO — integrado, sin gap con el grid
+    ════════════════════════════════════════════════════════════════ -->
+    <section class="relative pt-36 pb-16 overflow-hidden">
+
+      <!-- Background glow blobs -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-scalo-primary/15 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+      <div class="absolute top-20 right-10 w-[300px] h-[300px] bg-scalo-accent-violet/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
+
+      <div class="container mx-auto px-6 max-w-6xl">
+
+        <!-- Eyebrow tag -->
+        <div class="blog-reveal flex justify-center mb-6" style="--delay: 0ms">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-scalo-primary/30 bg-scalo-primary/10 text-scalo-primary text-xs font-bold uppercase tracking-widest">
+            <span class="w-1.5 h-1.5 rounded-full bg-scalo-accent-cyan animate-pulse inline-block"></span>
+            Scalo Blog
+          </span>
+        </div>
+
+        <!-- Main title -->
+        <div class="blog-reveal text-center" style="--delay: 80ms">
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6">
+            <span class="text-white">El </span><span class="bg-clip-text text-transparent bg-gradient-to-r from-scalo-primary via-scalo-accent-violet to-scalo-accent-cyan bg-[length:200%_200%] animate-gradient-slow">Blog</span>
+          </h1>
+          <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">
+            Insights del mercado, casos de estudio y guías técnicas<br class="hidden md:block" /> para que tomes mejores decisiones con tus datos.
+          </p>
+        </div>
+
+        <!-- Stats row -->
+        <div class="blog-reveal mt-10 flex flex-wrap items-center justify-center gap-8 text-center" style="--delay: 160ms">
+          <div>
+            <p class="text-2xl font-black text-white tracking-tight">{posts.length}+</p>
+            <p class="text-xs text-slate-500 uppercase tracking-widest font-medium mt-0.5">Artículos</p>
+          </div>
+          <div class="w-px h-8 bg-white/10 hidden sm:block"></div>
+          <div>
+            <p class="text-2xl font-black text-white tracking-tight">100%</p>
+            <p class="text-xs text-slate-500 uppercase tracking-widest font-medium mt-0.5">Gratuito</p>
+          </div>
+          <div class="w-px h-8 bg-white/10 hidden sm:block"></div>
+          <div>
+            <p class="text-2xl font-black text-white tracking-tight">BI</p>
+            <p class="text-xs text-slate-500 uppercase tracking-widest font-medium mt-0.5">Especializado</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Divider fade into section below -->
+      <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-deep-navy pointer-events-none -z-5"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         POSTS GRID — sin heading redundante, fluye directo del hero
+    ════════════════════════════════════════════════════════════════ -->
+    <AnimatedBlog client:visible posts={posts} showHeader={false} />
+
+  </main>
 
   <Footer />
 </Layout>
+
+<style>
+  /* Entrance animation for hero elements */
+  .blog-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: blogReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  @keyframes blogReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

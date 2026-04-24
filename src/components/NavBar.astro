@@ -1,8 +1,8 @@
 ---
 const navLinks = [
-  { name: 'Features', href: '#features' },
-  { name: 'Soluciones', href: '#soluciones' },
-  { name: 'Blog', href: '#blog' },
+  { name: 'Features', href: '/#features' },
+  { name: 'Soluciones', href: '/#soluciones' },
+  { name: 'Blog', href: '/blog' },
 ];
 ---
 
@@ -52,12 +52,6 @@ const navLinks = [
 
     <!-- Desktop CTA -->
     <div id="nav-cta" class="hidden md:flex items-center gap-4 transition-all duration-500 flex-shrink-0">
-      <a
-        href="#login"
-        class="text-slate-300 hover:text-white font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-scalo-primary rounded-md px-2 py-1"
-      >
-        Log in
-      </a>
       <button
         onclick="window.openLeadModal && window.openLeadModal()"
         class="bg-white text-deep-navy px-5 py-2 rounded-xl font-bold text-sm hover:bg-scalo-accent-cyan hover:scale-105 transition-all duration-300 shadow-xl shadow-white/5 hover:shadow-scalo-accent-cyan/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-deep-navy"
@@ -99,7 +93,6 @@ const navLinks = [
     </ul>
     <div class="h-px w-1/2 mx-auto bg-white/10 my-2"></div>
     <div class="flex flex-col gap-4 items-center">
-      <a href="#login" class="mobile-link text-slate-400 font-medium hover:text-white transition-colors">Log in</a>
       <button
         onclick="window.openLeadModal && window.openLeadModal(); document.getElementById('mobile-menu-btn')?.click();"
         class="w-full bg-scalo-primary text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-scalo-accent-violet transition-colors mt-2"
@@ -135,8 +128,7 @@ const navLinks = [
       navLinks.classList.add('gap-5');
       navLinks.classList.remove('gap-8');
 
-      // CTA: ocultar "Log in", mantener botón
-      navCta.querySelector('a')?.classList.add('hidden');
+      // CTA: compactar padding en isla
 
       header.classList.replace('pt-4', 'pt-3');
     } else {
@@ -150,7 +142,7 @@ const navLinks = [
 
       navLinks.classList.replace('gap-5', 'gap-8');
 
-      navCta.querySelector('a')?.classList.remove('hidden');
+
 
       header.classList.replace('pt-3', 'pt-4');
     }
