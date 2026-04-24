@@ -25,10 +25,11 @@ const {
     
     <link rel="icon" href="/favicon.png" type="image/png" />
     
-    <!-- Google Fonts: Poppins (acting as Scalan fallback) -->
+    <!-- Google Fonts: Poppins — display=swap prevents render-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" /></noscript>
     
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -56,19 +57,28 @@ const {
       import Lenis from 'lenis';
       
       const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        wheelMultiplier: 1,
-        touchMultiplier: 2,
+        duration: 1.1,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1.8,
         infinite: false,
       });
 
+      let rafId = 0;
       function raf(time: number) {
         lenis.raf(time);
-        requestAnimationFrame(raf);
+        rafId = requestAnimationFrame(raf);
       }
+      rafId = requestAnimationFrame(raf);
 
-      requestAnimationFrame(raf);
+      // Pause when tab hidden to save CPU
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          cancelAnimationFrame(rafId);
+        } else {
+          rafId = requestAnimationFrame(raf);
+        }
+      });
     </script>
   </body>
 </html>

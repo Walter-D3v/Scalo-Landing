@@ -39,7 +39,7 @@ const testimonials = rawOpinions.length > 0
     <FeatureBento />
     
     <section class="py-10 bg-deep-navy relative overflow-hidden">
-        <HowItWorksSteps client:visible />
+        <HowItWorksSteps client:idle />
     </section>
     
     <!-- Testimonial Marquee Carousel -->
@@ -58,21 +58,21 @@ const testimonials = rawOpinions.length > 0
       </div>
 
       <!-- Full-bleed marquee (no px container) -->
-      <TestimonialAccordion client:visible testimonials={testimonials} />
+      <TestimonialAccordion client:idle testimonials={testimonials} />
 
       <!-- Glow -->
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-scalo-accent-violet/5 blur-[120px] -z-10 rounded-full pointer-events-none"></div>
     </section>
 
     <!-- Blog Section instead of Pricing -->
-    <AnimatedBlog client:visible posts={blogPosts} />
+    <AnimatedBlog client:idle posts={blogPosts} />
     
     <!-- CTA Middle Section -->
     <section class="py-20 relative overflow-hidden">
       <div class="container mx-auto px-6">
         <div class="glass-card p-12 md:p-20 rounded-[40px] text-center relative overflow-hidden">
           <div id="tsparticles" class="absolute inset-0 z-0 pointer-events-none"></div>
-          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-scalo-primary/20 via-transparent to-scalo-accent-cyan/20 animate-pulse z-0"></div>
+          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-scalo-primary/20 via-transparent to-scalo-accent-cyan/20 z-0"></div>
           
           <div class="relative z-10">
             <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-6 md:mb-8 font-outfit uppercase tracking-tighter leading-tight">
@@ -130,21 +130,5 @@ const testimonials = rawOpinions.length > 0
     });
   </script>
 
-  <script is:inline src="https://cdn.jsdelivr.net/npm/tsparticles-preset-stars@2/tsparticles.preset.stars.bundle.min.js"></script>
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof tsParticles !== 'undefined') {
-        tsParticles.load("tsparticles", {
-          preset: "stars",
-          background: { color: { value: "transparent" } },
-          particles: {
-            number: { value: 120, density: { enable: true, value_area: 800 } },
-            size: { value: 2 },
-            opacity: { value: 0.5, animation: { enable: true, speed: 1, minimumValue: 0.1 } },
-            move: { enable: true, speed: 0.2, direction: "none", random: true, straight: false }
-          }
-        });
-      }
-    });
-  </script>
+
 </Layout>

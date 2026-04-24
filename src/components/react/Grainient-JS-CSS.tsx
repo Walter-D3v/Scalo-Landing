@@ -159,7 +159,8 @@ const Grainient: React.FC<GrainientProps> = ({
       webgl: 2,
       alpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
+      // Cap DPR to 1 on any device — halves GPU work on retina screens
+      dpr: 1
     });
 
     const gl = renderer.gl;
@@ -220,16 +221,29 @@ const Grainient: React.FC<GrainientProps> = ({
     setSize();
 
     let raf = 0;
+    let paused = false;
+    const TARGET_FPS = 30;
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
+    let lastFrameTime = 0;
     const t0 = performance.now();
+
     const loop = (t: number) => {
+      raf = requestAnimationFrame(loop);
+      if (paused) return;
+      if (t - lastFrameTime < FRAME_INTERVAL) return;
+      lastFrameTime = t;
       (program.uniforms.iTime as { value: number }).value = (t - t0) * 0.001;
       renderer.render({ scene: mesh });
-      raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
 
+    // Pause when tab is hidden — huge CPU/GPU saving
+    const onVisibility = () => { paused = document.hidden; };
+    document.addEventListener('visibilitychange', onVisibility);
+
     return () => {
       cancelAnimationFrame(raf);
+      document.removeEventListener('visibilitychange', onVisibility);
       ro.disconnect();
       try {
         container.removeChild(canvas);
