@@ -50,17 +50,6 @@ const navLinks = [
       ))}
     </ul>
 
-    <!-- Desktop CTA -->
-    <div id="nav-cta" class="hidden md:flex items-center gap-4 transition-all duration-500 flex-shrink-0">
-      <button
-        onclick="window.openLeadModal && window.openLeadModal()"
-        class="bg-white text-deep-navy px-5 py-2 rounded-xl font-bold text-sm hover:bg-scalo-accent-cyan hover:scale-105 transition-all duration-300 shadow-xl shadow-white/5 hover:shadow-scalo-accent-cyan/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-deep-navy"
-        aria-label="Abre el formulario para empezar ahora"
-      >
-        Empezar Ahora
-      </button>
-    </div>
-
     <!-- Mobile Menu Toggle -->
     <button
       id="mobile-menu-btn"
@@ -91,15 +80,6 @@ const navLinks = [
         </li>
       ))}
     </ul>
-    <div class="h-px w-1/2 mx-auto bg-white/10 my-2"></div>
-    <div class="flex flex-col gap-4 items-center">
-      <button
-        onclick="window.openLeadModal && window.openLeadModal(); document.getElementById('mobile-menu-btn')?.click();"
-        class="w-full bg-scalo-primary text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-scalo-accent-violet transition-colors mt-2"
-      >
-        Empezar Ahora
-      </button>
-    </div>
   </div>
 </header>
 
@@ -108,7 +88,6 @@ const navLinks = [
   const nav      = document.getElementById('main-nav')!;
   const logo     = document.getElementById('nav-logo')!;
   const navLinks = document.getElementById('nav-links')!;
-  const navCta   = document.getElementById('nav-cta')!;
 
   let isScrolled = false;
 
