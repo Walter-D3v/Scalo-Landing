@@ -8,6 +8,7 @@ import HowItWorksSteps from '../components/react/HowItWorksSteps';
 import AnimatedBlog from '../components/react/AnimatedBlog';
 import Footer from '../components/Footer.astro';
 import TestimonialAccordion from '../components/react/TestimonialAccordion';
+import Waitlist from '../components/Waitlist.astro';
 import { getFeaturedPosts, getOpinions, normalizeUrl } from '../lib/content-island';
 
 const blogPosts = await getFeaturedPosts(3);
@@ -70,6 +71,7 @@ const testimonials = rawOpinions.length > 0
 
   </main>
 
+  <Waitlist />
   <Footer />
 
   <script>
