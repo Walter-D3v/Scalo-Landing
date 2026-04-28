@@ -2,14 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 import NavBar from '../components/NavBar.astro';
 import Footer from '../components/Footer.astro';
+import Aurora from '../components/react/Aurora';
 ---
 
 <Layout title="Private Testing - Scalo">
   <NavBar />
   
   <main class="min-h-screen pt-24 bg-deep-navy relative flex flex-col justify-center">
-    <!-- Glow background -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-scalo-accent-violet/10 blur-[120px] -z-10 rounded-full pointer-events-none"></div>
+    <!-- Interactive Background -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-screen">
+      <Aurora 
+        client:only="react"
+        colorStops={['#260947', '#6366f1', '#06b6d4']}
+        amplitude={1.5}
+        blend={0.5}
+        speed={0.8}
+      />
+    </div>
 
     <section class="container mx-auto px-6 py-12 relative z-10 max-w-5xl flex flex-col lg:flex-row items-center gap-16">
       
