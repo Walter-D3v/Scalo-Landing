@@ -31,10 +31,19 @@ function PostCard({ post, index }: { post: CIPost; index: number }) {
   ];
   const accent = accents[index % accents.length];
 
+  // Formateo determinista para evitar error de hidratación #418
+  const formatDate = (dateStr: string) => {
+    try {
+      const [year, month, day] = dateStr.split('T')[0].split('-');
+      const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+      return `${parseInt(day, 10)} ${months[parseInt(month, 10) - 1]} ${year}`;
+    } catch (e) {
+      return dateStr;
+    }
+  };
+
   const imageUrl = normalizeUrl(post.CoverImage);
-  const date = post.PublishedAt
-    ? new Date(post.PublishedAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' })
-    : null;
+  const date = post.PublishedAt ? formatDate(post.PublishedAt) : null;
 
   return (
     <motion.div variants={cardVariants} className="h-full">
