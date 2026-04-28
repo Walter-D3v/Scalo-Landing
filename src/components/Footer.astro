@@ -2,46 +2,47 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="py-20 bg-deep-navy/80 border-t border-white/5 relative overflow-hidden">
-  <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-16 md:mb-20 relative z-10">
-    <!-- Brand Info -->
-    <div class="col-span-2 md:col-span-1">
-      <div class="flex items-center gap-2 mb-6">
-        <img src="/Scalo-logoWhite.png" alt="Scalo" class="h-12 w-auto" />
+<footer class="py-20 bg-deep-navy border-t border-white/5 relative overflow-hidden">
+  <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between gap-16 md:gap-8 mb-20 md:mb-32 relative z-10 mt-10">
+    <!-- Brand Info (Left) -->
+    <div class="md:w-1/2 flex flex-col justify-center">
+      <div class="mb-10">
+        <img id="footer-logo" src="/Scalo-logoWhite.png" alt="Scalo" class="h-16 md:h-20 w-auto" />
       </div>
-      <p class="text-slate-400 text-sm leading-relaxed mb-6 font-outfit font-light">
-        Transformando datos complejos en decisiones estratégicas efectivas. 
-        Nuestra misión es empoderar a la próxima generación de startups.
+      <p class="text-white text-base md:text-[17px] leading-relaxed font-outfit font-light max-w-md">
+        Transformando datos complejos en decisiones estratégicas efectivas. Nuestra misión es empoderar a la próxima generación de startups.
       </p>
-      
-      <!-- Socials -->
-      <div class="flex items-center gap-4">
-        <a href="https://www.instagram.com/scalolatam/" class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:bg-scalo-primary hover:text-white transition-all duration-300">Ig</a>
-        <a href="https://www.linkedin.com/company/scalolatam/" class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:bg-scalo-primary hover:text-white transition-all duration-300">in</a>
-      </div>
     </div>
 
-    <!-- Links -->
+    <!-- Links & Socials (Right) -->
+    <div class="md:w-1/2 flex flex-col md:items-end justify-center">
+      <div class="w-full max-w-sm flex flex-col gap-14">
+        <!-- Grid Links -->
+        <div class="grid grid-cols-2 gap-x-8 gap-y-5 text-white font-outfit font-normal text-[15px]">
+          <a href="/#features" class="hover:text-scalo-accent-cyan transition-colors">Funcionalidades</a>
+          <a href="/#problema" class="hover:text-scalo-accent-cyan transition-colors">El problema</a>
+          <a href="/#soluciones" class="hover:text-scalo-accent-cyan transition-colors">Soluciones</a>
+          <a href="/blog" class="hover:text-scalo-accent-cyan transition-colors">Insights</a>
+          <a href="/waitlist" class="hover:text-scalo-accent-cyan transition-colors">Private testing</a>
+          <a href="mailto:hola@iterocompany.com" class="hover:text-scalo-accent-cyan transition-colors">Contacto</a>
+        </div>
 
-    <div>
-      <h4 class="text-white mb-6 font-outfit font-bold">Compañía</h4>
-      <ul class="space-y-4 text-sm text-slate-400 mb-6 font-outfit font-normal">
-        <li><a href="#" class="hover:text-scalo-accent-cyan transition-colors">Sobre nosotros</a></li>
-        <li><a href="https://iterocompany.com/" class="hover:text-scalo-accent-cyan transition-colors">Itero Company</a></li>
-        <li><a href="/blog" class="hover:text-scalo-accent-cyan transition-colors">Nuestro Blog</a></li>
-      </ul>
+        <!-- Socials -->
+        <div>
+          <h4 class="text-[22px] text-white font-outfit font-bold mb-5 tracking-tight">Síganos en redes sociales</h4>
+          <div class="flex items-center gap-6 text-white font-outfit font-normal text-[15px]">
+            <a href="https://www.linkedin.com/company/scalolatam/" class="hover:text-scalo-accent-cyan transition-colors">LinkedIn</a>
+            <a href="https://www.instagram.com/scalolatam/" class="hover:text-scalo-accent-cyan transition-colors">Instagram</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="container mx-auto px-6 border-t border-white/5 pt-8 md:pt-10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-outfit font-thin tracking-widest relative z-10 text-center md:text-left">
-    <p>© {currentYear} Scalo. Todos los derechos reservados.</p>
-    <div class="flex items-center gap-6">
-      <div class="flex items-center gap-2">
-        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-        Un producto de <a href="https://iterocompany.com/" rel="Itero Company" class="hover:text-scalo-accent-cyan transition-colors">Itero Company</a>
-      </div>
-      <div>Hecho con ❤️ por scalo team</div>
-    </div>
+  <div class="container mx-auto px-6 relative z-10 text-center font-outfit font-light text-slate-300 text-[15px]">
+    <p>
+      Un producto de <a href="https://iterocompany.com/" rel="Itero Company" class="text-white hover:text-scalo-accent-cyan transition-colors font-normal">Itero Company</a> • Hecho con ❤️ por scalo team
+    </p>
   </div>
   
   <!-- Subtle Gradient Decoration -->
