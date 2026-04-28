@@ -172,14 +172,14 @@ const navLinks = [
 
     if (menuOpen) {
       mobileDrawer.classList.remove('-translate-y-[120%]', 'opacity-0', 'pointer-events-none');
-      mobileDrawer.classList.add('translate-y-0', 'opacity-100');
+      mobileDrawer.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
       line1.classList.add('translate-y-2', 'rotate-45');
       line2.classList.add('opacity-0');
       line3.classList.add('-translate-y-2', '-rotate-45');
       document.body.style.overflow = 'hidden';
     } else {
       mobileDrawer.classList.add('-translate-y-[120%]', 'opacity-0', 'pointer-events-none');
-      mobileDrawer.classList.remove('translate-y-0', 'opacity-100');
+      mobileDrawer.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
       line1.classList.remove('translate-y-2', 'rotate-45');
       line2.classList.remove('opacity-0');
       line3.classList.remove('-translate-y-2', '-rotate-45');
