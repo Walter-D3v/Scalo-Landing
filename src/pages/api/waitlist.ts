@@ -34,9 +34,9 @@ export const POST: APIRoute = async ({ request }) => {
     const markdownContent = `
 # Nuevo Registro en Waitlist
 
-**Fecha:** ${dateStr}
-**Nombre:** ${name}
-**Correo:** ${email}
+- **Nombre:** ${name}
+- **Correo:** ${email}
+- **Fecha:** ${dateStr}
 
 ## ¿Qué problema quiere resolver?
 ${problem}
@@ -52,7 +52,7 @@ ${problem}
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: `Waitlist - ${name}`,
+        title: name,
         text: markdownContent,
         collectionId: OUTLINE_COLLECTION_ID,
         publish: true,
