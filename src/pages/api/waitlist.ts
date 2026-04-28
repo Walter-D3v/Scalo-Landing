@@ -4,14 +4,15 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     // 1. Get form data
     const data = await request.formData();
-    const name = data.get('name');
-    const email = data.get('email');
-    const problem = data.get('problem') || 'No especificado';
+    const companyName = data.get('companyName');
+    const founderName = data.get('founderName');
+    const founderEmail = data.get('founderEmail');
+    const industry = data.get('industry');
 
     // 2. Validate basic required fields
-    if (!name || !email) {
+    if (!companyName || !founderName || !founderEmail || !industry) {
       return new Response(
-        JSON.stringify({ error: 'Nombre y correo son requeridos.' }),
+        JSON.stringify({ error: 'Todos los campos son requeridos.' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -32,14 +33,13 @@ export const POST: APIRoute = async ({ request }) => {
     // 4. Prepare Markdown content
     const dateStr = new Date().toISOString();
     const markdownContent = `
-# Nuevo Registro en Waitlist
+# Nuevo Registro de Private Testing
 
-- **Nombre:** ${name}
-- **Correo:** ${email}
+- **Empresa:** ${companyName}
+- **Founder:** ${founderName}
+- **Correo:** ${founderEmail}
+- **Rubro:** ${industry}
 - **Fecha:** ${dateStr}
-
-## ¿Qué problema quiere resolver?
-${problem}
 `;
 
     // 5. Send to Outline API
@@ -52,7 +52,7 @@ ${problem}
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: name,
+        title: `${companyName} - ${founderName}`,
         text: markdownContent,
         collectionId: OUTLINE_COLLECTION_ID,
         publish: true,

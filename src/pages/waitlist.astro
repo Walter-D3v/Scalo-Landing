@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Private Testing - Scalo">
+  <NavBar />
+  
+  <main class="min-h-screen pt-24 bg-deep-navy relative flex flex-col justify-center">
+    <!-- Glow background -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-scalo-accent-violet/10 blur-[120px] -z-10 rounded-full pointer-events-none"></div>
+
+    <section class="container mx-auto px-6 py-12 relative z-10 max-w-5xl flex flex-col lg:flex-row items-center gap-16">
+      
+      <!-- Text Content -->
+      <div class="flex-1 text-center lg:text-left">
+        <h1 class="text-4xl md:text-6xl font-black mb-6 font-outfit uppercase tracking-tighter text-white">
+          Accede al <br/>
+          <span class="text-scalo-accent-violet">Private Testing</span><br/>
+          de Scalo
+        </h1>
+        <p class="text-slate-300 mb-6 text-lg md:text-xl leading-relaxed">
+          Sé parte del grupo reducido que está probando la próxima generación de decisiones basadas en datos.
+        </p>
+        <p class="text-slate-400 mb-8 text-base md:text-lg">
+          Obtén acceso anticipado, influye en el producto y descubre antes que nadie cómo convertir tus datos en crecimiento real.
+        </p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-scalo-accent-violet animate-pulse"></span>
+          No es una lista de espera. Es acceso temprano.
+        </div>
+      </div>
+
+      <!-- Form Container -->
+      <div class="w-full lg:w-[450px] flex-shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+        
+        <!-- Success Message -->
+        <div id="waitlist-success" class="absolute inset-0 bg-deep-navy/95 backdrop-blur flex flex-col items-center justify-center hidden z-20 transition-opacity duration-300">
+          <div class="w-16 h-16 bg-scalo-accent-violet/20 rounded-full flex items-center justify-center mb-4 text-scalo-accent-violet text-3xl">
+            🚀
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2 font-outfit">¡Solicitud enviada!</h3>
+          <p class="text-slate-400 text-center px-4">Gracias por tu interés en el Private Testing. Te contactaremos muy pronto.</p>
+        </div>
+
+        <form id="waitlist-form" class="space-y-5">
+          <div class="space-y-1.5">
+            <label for="companyName" class="text-sm font-medium text-slate-300 ml-1">Nombre de empresa <span class="text-red-500">*</span></label>
+            <input 
+              type="text" 
+              id="companyName" 
+              name="companyName" 
+              required
+              class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-scalo-accent-violet focus:border-transparent transition-all"
+            />
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="founderName" class="text-sm font-medium text-slate-300 ml-1">Nombre del Founder <span class="text-red-500">*</span></label>
+            <input 
+              type="text" 
+              id="founderName" 
+              name="founderName" 
+              required
+              class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-scalo-accent-violet focus:border-transparent transition-all"
+            />
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="founderEmail" class="text-sm font-medium text-slate-300 ml-1">Correo del Founder <span class="text-red-500">*</span></label>
+            <input 
+              type="email" 
+              id="founderEmail" 
+              name="founderEmail" 
+              required
+              class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-scalo-accent-violet focus:border-transparent transition-all"
+            />
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="industry" class="text-sm font-medium text-slate-300 ml-1">Rubro de la empresa <span class="text-red-500">*</span></label>
+            <input 
+              type="text" 
+              id="industry" 
+              name="industry" 
+              required
+              class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-scalo-accent-violet focus:border-transparent transition-all"
+            />
+          </div>
+
+          <!-- Error Message -->
+          <div id="waitlist-error" class="hidden text-red-400 text-sm py-1 font-medium text-center">
+            Ocurrió un error. Por favor, intenta nuevamente.
+          </div>
+
+          <button 
+            type="submit" 
+            id="waitlist-submit"
+            class="w-full bg-scalo-accent-violet hover:bg-scalo-accent-violet/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group relative overflow-hidden mt-6"
+          >
+            <span class="relative z-10 flex items-center gap-2">
+              Solicitar Acceso
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </span>
+            <!-- Loading Spinner -->
+            <svg id="waitlist-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    const form = document.getElementById('waitlist-form') as HTMLFormElement;
+    const submitBtn = document.getElementById('waitlist-submit') as HTMLButtonElement;
+    const spinner = document.getElementById('waitlist-spinner') as HTMLElement;
+    const btnText = submitBtn?.querySelector('span') as HTMLElement;
+    const successMsg = document.getElementById('waitlist-success') as HTMLElement;
+    const errorMsg = document.getElementById('waitlist-error') as HTMLElement;
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const founderEmail = formData.get('founderEmail') as string;
+        
+        // Email regex basic validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(founderEmail)) {
+          errorMsg.textContent = "Por favor ingresa un correo válido.";
+          errorMsg.classList.remove('hidden');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+        btnText.classList.add('invisible');
+        spinner.classList.remove('hidden');
+        errorMsg.classList.add('hidden');
+
+        try {
+          const response = await fetch('/api/waitlist', {
+            method: 'POST',
+            body: formData,
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.error || 'Network error');
+          }
+
+          successMsg.classList.remove('hidden');
+          form.reset();
+          
+        } catch (error) {
+          console.error('Error submitting waitlist:', error);
+          errorMsg.textContent = "Ocurrió un error. Por favor, intenta nuevamente.";
+          errorMsg.classList.remove('hidden');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+          btnText.classList.remove('invisible');
+          spinner.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+</Layout>
