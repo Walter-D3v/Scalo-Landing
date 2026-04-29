@@ -1,8 +1,26 @@
 ---
+import { getLandingSectionsConfig } from '../lib/content-island';
+
+const sectionsConfig = await getLandingSectionsConfig();
+
+const getBool = (config: any, fieldName: string): boolean => {
+  if (!config) return true;
+  const lower = fieldName.toLowerCase();
+  if (typeof config[fieldName] === 'boolean') return config[fieldName];
+  if (typeof config[lower] === 'boolean') return config[lower];
+  if (typeof config.fields?.[fieldName] === 'boolean') return config.fields[fieldName];
+  if (typeof config.fields?.[lower] === 'boolean') return config.fields[lower];
+  return true;
+};
+
+const showFeatures = getBool(sectionsConfig, 'Features');
+const showTestimonials = getBool(sectionsConfig, 'Testimonials');
+const showBlog = getBool(sectionsConfig, 'Blog');
+
 const navLinks = [
-  { name: 'Features', href: '/#features' },
-  { name: 'Soluciones', href: '/#soluciones' },
-  { name: 'Blog', href: '/blog' },
+  ...(showFeatures ? [{ name: 'Features', href: '/#features' }] : []),
+  ...(showTestimonials ? [{ name: 'Soluciones', href: '/#soluciones' }] : []),
+  ...(showBlog ? [{ name: 'Blog', href: '/blog' }] : []),
 ];
 ---
 
@@ -57,7 +75,7 @@ const navLinks = [
       <!-- CTA Button -->
       <a 
         href="/waitlist" 
-        class="hidden md:flex bg-scalo-accent-violet hover:bg-scalo-accent-violet/90 text-white font-bold py-2 px-5 rounded-full text-sm transition-all duration-300"
+        class="hidden md:flex bg-scalo-accent-violet hover:bg-scalo-accent-violet/90 text-white font-bold py-2 px-5 rounded-full text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_20px_-5px_rgba(139,92,246,0.6)]"
       >
         Private Testing
       </a>
