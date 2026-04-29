@@ -13,12 +13,16 @@ const getBool = (config: any, fieldName: string): boolean => {
   return true;
 };
 
+const showProblem = getBool(sectionsConfig, 'ProblemSection');
 const showFeatures = getBool(sectionsConfig, 'Features');
+const showHowItWorks = getBool(sectionsConfig, 'HowItWorks');
 const showTestimonials = getBool(sectionsConfig, 'Testimonials');
 const showBlog = getBool(sectionsConfig, 'Blog');
 
 const navLinks = [
+  ...(showProblem ? [{ name: 'Por qué Scalo', href: '/#problema' }] : []),
   ...(showFeatures ? [{ name: 'Features', href: '/#features' }] : []),
+  ...(showHowItWorks ? [{ name: 'Cómo funciona', href: '/#como-funciona' }] : []),
   ...(showTestimonials ? [{ name: 'Soluciones', href: '/#soluciones' }] : []),
   ...(showBlog ? [{ name: 'Blog', href: '/blog' }] : []),
 ];
