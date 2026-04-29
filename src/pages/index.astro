@@ -14,14 +14,24 @@ const blogPosts = await getFeaturedPosts(3);
 const rawOpinions = await getOpinions(6);
 const sectionsConfig = await getLandingSectionsConfig();
 
-// Default everything to true if config fails or is not found
+// Helper to safely extract boolean from Content Island variations
+const getBool = (config: any, fieldName: string): boolean => {
+  if (!config) return true;
+  const lower = fieldName.toLowerCase();
+  if (typeof config[fieldName] === 'boolean') return config[fieldName];
+  if (typeof config[lower] === 'boolean') return config[lower];
+  if (typeof config.fields?.[fieldName] === 'boolean') return config.fields[fieldName];
+  if (typeof config.fields?.[lower] === 'boolean') return config.fields[lower];
+  return true; // Default to true
+};
+
 const show = {
-  Hero: sectionsConfig?.Hero ?? true,
-  ProblemSection: sectionsConfig?.ProblemSection ?? true,
-  Features: sectionsConfig?.Features ?? true,
-  HowItWorks: sectionsConfig?.HowItWorks ?? true,
-  Testimonials: sectionsConfig?.Testimonials ?? true,
-  Blog: sectionsConfig?.Blog ?? true,
+  Hero: getBool(sectionsConfig, 'Hero'),
+  ProblemSection: getBool(sectionsConfig, 'ProblemSection'),
+  Features: getBool(sectionsConfig, 'Features'),
+  HowItWorks: getBool(sectionsConfig, 'HowItWorks'),
+  Testimonials: getBool(sectionsConfig, 'Testimonials'),
+  Blog: getBool(sectionsConfig, 'Blog'),
 };
 
 const colors = ['#6366f1', '#06b6d4', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
