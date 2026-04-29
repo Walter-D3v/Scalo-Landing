@@ -52,6 +52,16 @@ export interface CIOpinion {
   ranking?: number;
 }
 
+export interface CILandingSections {
+  id: string;
+  Hero?: boolean;
+  ProblemSection?: boolean;
+  Features?: boolean;
+  HowItWorks?: boolean;
+  Testimonials?: boolean;
+  Blog?: boolean;
+}
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /**
@@ -175,5 +185,32 @@ export async function getOpinions(limit = 6): Promise<CIOpinion[]> {
   } catch (err: any) {
     console.warn('[content-island] getOpinions falló:', err?.message ?? err);
     return [];
+  }
+}
+
+/** Trae la configuración de visibilidad de secciones de la landing. */
+export async function getLandingSectionsConfig(): Promise<CILandingSections | null> {
+  try {
+    // Intentamos con 'Landing sections', si el nombre interno varía puedes cambiarlo a 'landing_sections'
+    let configs = await client.getContentList<CILandingSections>({
+      contentType: 'Landing sections',
+      pagination: { take: 10 },
+    }).catch(() => []);
+
+    if (configs.length === 0) {
+      configs = await client.getContentList<CILandingSections>({
+        contentType: 'landing_sections',
+        pagination: { take: 10 },
+      }).catch(() => []);
+    }
+
+    if (configs.length === 0) return null;
+
+    // Retorna la configuración con el ID específico que creaste, o la primera si no la encuentra
+    const match = configs.find(c => c.id === '69f13b79a18f592ddc97e15e') || configs[0];
+    return match ?? null;
+  } catch (err: any) {
+    console.warn('[content-island] getLandingSectionsConfig falló:', err?.message ?? err);
+    return null;
   }
 }
