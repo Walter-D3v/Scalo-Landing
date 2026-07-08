@@ -12,14 +12,14 @@ const posts = await getPosts(9);
   title="Blog — Scalo"
   description="Insights del mercado, casos de estudio y guías técnicas para dominar tus datos."
 >
-  <NavBar />
+  <NavBar variant="dark" />
 
   <main class="min-h-screen">
 
     <!-- ═══════════════════════════════════════════════════════════
          BLOG HERO — integrado, sin gap con el grid
     ════════════════════════════════════════════════════════════════ -->
-    <section class="relative pt-36 pb-16 overflow-hidden">
+    <section class="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-14 md:pt-36 md:pb-16">
 
       <!-- Background glow blobs -->
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-scalo-primary/15 blur-[120px] rounded-full pointer-events-none -z-10"></div>
@@ -37,7 +37,7 @@ const posts = await getPosts(9);
 
         <!-- Main title -->
         <div class="blog-reveal text-center" style="--delay: 80ms">
-          <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] mb-6">
+          <h1 class="mb-6 text-4xl font-black leading-[0.95] tracking-tighter sm:text-5xl md:text-7xl lg:text-8xl">
             <span class="text-white">Conoce nuestro </span><br><span class="bg-clip-text text-transparent bg-gradient-to-r from-scalo-primary via-scalo-accent-violet to-scalo-accent-cyan bg-[length:200%_200%] animate-gradient-slow">Blog</span>
           </h1>
           <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">

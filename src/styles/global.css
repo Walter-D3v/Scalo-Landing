@@ -1,16 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors - Modern Scalo Palette (Itero + ReactBits) */
-  --color-deep-navy: #0B0B0F;
+  /* Colors - Figma V1.2026 + legacy */
+  --color-deep-navy: #100E32;
   --color-navy-blue: #111217;
-  --color-scalo-primary: #3B82F6;
+  --color-scalo-primary: #5D49F6;
+  --color-scalo-primary-dark: #282689;
+  --color-scalo-primary-50: #ECF0FF;
+  --color-scalo-secondary: #2C25AE;
+  --color-white-linen: #F1EAE2;
   --color-scalo-accent-cyan: #22D3EE;
   --color-scalo-accent-violet: #8B5CF6;
   --color-scalo-accent-pink: #A78BFA;
   
   /* Fonts */
-  --font-scalan: 'Poppins', sans-serif; /* Fallback for Scalan */
+  --font-scalan: 'Outfit', 'Poppins', sans-serif;
   --font-space: var(--font-scalan); /* Backwards compatibility */
   --font-outfit: var(--font-scalan); /* Backwards compatibility */
   
@@ -61,11 +65,48 @@
   }
 }
 
+/* Reveal on scroll — add .visible via IntersectionObserver */
+.animate-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-float {
+    animation: none !important;
+  }
+}
+
 @utility glass {
   @apply bg-white/5 backdrop-blur-xl border border-white/10;
 }
 @utility glass-card {
   @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-2xl;
+}
+@utility glass-panel {
+  @apply bg-gradient-to-b from-white-linen/60 via-white/80 to-white/20 backdrop-blur-sm border border-black/10;
+}
+@utility glass-input {
+  @apply bg-white/50 backdrop-blur-[2px] border border-black/10 rounded-xl h-[52px] px-4 text-deep-navy font-outfit focus:outline-none focus:ring-2 focus:ring-scalo-primary focus:border-transparent transition-all;
+}
+@utility section-eyebrow {
+  @apply text-deep-navy/60 font-outfit text-base md:text-lg leading-relaxed;
+}
+@utility section-title {
+  @apply text-3xl md:text-4xl lg:text-5xl font-outfit font-bold text-deep-navy leading-tight tracking-tight;
 }
 @utility text-glow {
   text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
@@ -75,4 +116,13 @@
     radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
     radial-gradient(circle at 50% 10%, rgba(34, 211, 238, 0.05) 0%, transparent 30%);
+}
+@utility bg-hero-linen {
+  background: linear-gradient(to top, #ffffff 0%, var(--color-white-linen) 100%);
+}
+@utility btn-scalo-primary {
+  @apply bg-gradient-to-r from-scalo-primary to-scalo-primary-dark text-white font-bold rounded-full transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(93,73,246,0.6)] hover:-translate-y-0.5;
+}
+@utility btn-scalo-dark {
+  @apply bg-deep-navy text-white font-black uppercase tracking-[3px] sm:tracking-[5.5px] rounded-full transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
 }

@@ -2,117 +2,55 @@
 import Layout from '../layouts/Layout.astro';
 import NavBar from '../components/NavBar.astro';
 import Hero from '../components/Hero.astro';
-import FeatureBento from '../components/FeatureBento.astro';
-import ProblemSection from '../components/ProblemSection.astro';
-import HowItWorksSteps from '../components/react/HowItWorksSteps';
-import AnimatedBlog from '../components/react/AnimatedBlog';
+import CompaniesLogos from '../components/CompaniesLogos.astro';
+import FeatureBlocks from '../components/FeatureBlocks.astro';
+import HowItWorksCards from '../components/HowItWorksCards.astro';
+import BuildTogetherCTA from '../components/BuildTogetherCTA.astro';
+import FaqAccordion from '../components/react/FaqAccordion';
+import FinalCTA from '../components/FinalCTA.astro';
 import Footer from '../components/Footer.astro';
-import TestimonialAccordion from '../components/react/TestimonialAccordion';
-import { getFeaturedPosts, getOpinions, normalizeUrl, getLandingSectionsConfig } from '../lib/content-island';
-
-const blogPosts = await getFeaturedPosts(3);
-const rawOpinions = await getOpinions(6);
-const sectionsConfig = await getLandingSectionsConfig();
-
-// Helper to safely extract boolean from Content Island variations
-const getBool = (config: any, fieldName: string): boolean => {
-  if (!config) return true;
-  const lower = fieldName.toLowerCase();
-  if (typeof config[fieldName] === 'boolean') return config[fieldName];
-  if (typeof config[lower] === 'boolean') return config[lower];
-  if (typeof config.fields?.[fieldName] === 'boolean') return config.fields[fieldName];
-  if (typeof config.fields?.[lower] === 'boolean') return config.fields[lower];
-  return true; // Default to true
-};
-
-const show = {
-  Hero: getBool(sectionsConfig, 'Hero'),
-  ProblemSection: getBool(sectionsConfig, 'ProblemSection'),
-  Features: getBool(sectionsConfig, 'Features'),
-  HowItWorks: getBool(sectionsConfig, 'HowItWorks'),
-  Testimonials: getBool(sectionsConfig, 'Testimonials'),
-  Blog: getBool(sectionsConfig, 'Blog'),
-};
-
-const colors = ['#6366f1', '#06b6d4', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
-
-const testimonials = rawOpinions.length > 0 
-  ? rawOpinions.map((op, index) => ({
-      author: op.name,
-      role: op.source || '',
-      feedback: op.content,
-      rating: op.ranking || 5,
-      accent: colors[index % colors.length],
-      initials: op.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase(),
-      avatar: normalizeUrl(op.avatar),
-    }))
-  : undefined;
 ---
 
-<Layout title="Scalo - Business Intelligence de Próxima Generación">
-  <NavBar />
-  
+<Layout
+  title="Scalo - Business Intelligence de Próxima Generación"
+  description="Scalo convierte la información de tu empresa en decisiones concretas. Sin reportes que nadie lee. Sin consultores caros."
+  theme="light"
+>
+  <NavBar variant="light" />
+
   <main>
-    {show.Hero && <Hero />}
-    
-    {show.ProblemSection && <ProblemSection />}
-    
-    {show.Features && <FeatureBento />}
-    
-    {show.HowItWorks && (
-      <section id="como-funciona" class="py-10 bg-deep-navy relative overflow-hidden">
-        <HowItWorksSteps client:idle />
-      </section>
-    )}
-    
-    {show.Testimonials && testimonials && testimonials.length > 0 && (
-      <section id="soluciones" class="py-20 relative overflow-hidden bg-deep-navy border-t border-white/5">
-        <div class="container mx-auto px-6 text-center mb-12 relative z-10">
-          <span class="inline-block px-3 py-1 text-xs font-outfit font-thin tracking-widest text-scalo-accent-violet border border-scalo-accent-violet/30 rounded-full mb-4">
-            Testimonios
-          </span>
-          <h2 class="text-3xl md:text-5xl font-outfit font-bold mb-4 tracking-tighter">
-            Empresas que ya <span class="text-scalo-accent-violet">entienden su negocio</span>
+    <Hero />
+    <CompaniesLogos />
+    <FeatureBlocks />
+    <HowItWorksCards />
+    <BuildTogetherCTA />
+
+    <section id="faqs" class="bg-white pt-14 pb-10 sm:pt-16 md:pt-20 md:pb-12 lg:pt-24 lg:pb-14">
+      <div class="container mx-auto max-w-[880px] px-4 sm:px-6">
+        <div class="animate-reveal mb-7 text-center sm:mb-8 md:mb-10">
+          <h2 class="mb-2 font-outfit text-[1.75rem] font-bold leading-tight tracking-[-0.025em] text-deep-navy sm:text-3xl md:text-[2.35rem]">
+            Preguntas frecuentes
           </h2>
-          <p class="max-w-xl mx-auto text-slate-400 font-outfit font-normal">
-            Lo que las empresas líderes dicen sobre cómo Scalo transformó sus datos en decisiones accionables.
+          <p class="font-outfit text-sm font-semibold text-deep-navy/55 sm:text-base">
+            Resolvemos las dudas más comunes sobre Scalo.
           </p>
         </div>
+        <FaqAccordion client:visible />
+      </div>
+    </section>
 
-        <TestimonialAccordion client:idle testimonials={testimonials} />
-
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-scalo-accent-violet/5 blur-[120px] -z-10 rounded-full pointer-events-none"></div>
-      </section>
-    )}
-
-    {show.Blog && <AnimatedBlog client:idle posts={blogPosts} />}
+    <FinalCTA />
   </main>
 
   <Footer />
 
   <script>
-    // Reveal animation logic
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          if (entry.target instanceof HTMLElement) {
-             entry.target.style.opacity = '1';
-             entry.target.style.transform = 'translateY(0)';
-          }
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.animate-reveal').forEach(el => {
-      observer.observe(el);
-    });
+    document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
   </script>
-
-
 </Layout>

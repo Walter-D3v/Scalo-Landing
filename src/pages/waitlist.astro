@@ -2,182 +2,231 @@
 import Layout from '../layouts/Layout.astro';
 import NavBar from '../components/NavBar.astro';
 import Footer from '../components/Footer.astro';
-import Aurora from '../components/react/Aurora';
+
+type WaitlistField = {
+  id: string;
+  name: string;
+  label: string;
+  type: 'text' | 'email' | 'tel';
+};
+
+const fields: WaitlistField[] = [
+  { id: 'companyName', name: 'companyName', label: 'Nombre de empresa', type: 'text' },
+  { id: 'founderName', name: 'founderName', label: 'Nombre del founder', type: 'text' },
+  { id: 'founderEmail', name: 'founderEmail', label: 'Correo del founder', type: 'email' },
+  { id: 'contactPhone', name: 'contactPhone', label: 'Número de contacto', type: 'tel' },
+  { id: 'industry', name: 'industry', label: 'Rubro de la empresa', type: 'text' },
+];
 ---
 
-<Layout title="Private Testing - Scalo">
-  <NavBar />
-  
-  <main class="min-h-screen pt-24 bg-deep-navy relative flex flex-col justify-center overflow-hidden w-full">
-    <!-- Interactive Background -->
-    <div class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-40 mix-blend-screen overflow-hidden">
-      <Aurora 
-        client:only="react"
-        colorStops={['#260947', '#6366f1', '#06b6d4']}
-        amplitude={1.5}
-        blend={0.5}
-        speed={0.8}
-      />
-    </div>
+<Layout
+  title="Acceso anticipado — Scalo"
+  description="Sé parte del grupo fundador que está probando Scalo. Acceso gratuito al piloto y participación directa en el producto."
+  theme="light"
+>
+  <NavBar variant="light" />
 
-    <section class="container mx-auto px-6 py-12 relative z-10 max-w-5xl flex flex-col lg:flex-row items-center gap-16">
-      
-      <!-- Text Content -->
-      <div class="flex-1 text-center lg:text-left opacity-0 animate-reveal" style="animation-delay: 0.1s">
-        <h1 class="text-4xl md:text-6xl mb-6 font-outfit font-bold tracking-tighter text-white">
-          Accede al <br/>
-          <span class="text-scalo-accent-violet">private testing</span><br/>
-          de Scalo
-        </h1>
-        <p class="text-slate-300 mb-6 text-lg md:text-xl leading-relaxed font-outfit font-normal">
-          Sé parte del grupo reducido que está probando la próxima generación de decisiones basadas en datos.
-        </p>
-        <p class="text-slate-400 mb-8 text-base md:text-lg font-outfit font-normal">
-          Obtén acceso anticipado, influye en el producto y descubre antes que nadie cómo convertir tus datos en crecimiento real.
-        </p>
-      </div>
-
-      <!-- Form Container -->
-      <div class="w-full lg:w-[450px] flex-shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-3xl p-8 shadow-2xl relative overflow-hidden opacity-0 animate-reveal" style="animation-delay: 0.3s">
-        
-        <!-- Success Message -->
-        <div id="waitlist-success" class="absolute inset-0 bg-deep-navy/95 backdrop-blur flex flex-col items-center justify-center hidden z-20 transition-opacity duration-300">
-          <div class="w-16 h-16 bg-scalo-accent-violet/20 rounded-full flex items-center justify-center mb-4 text-scalo-accent-violet text-3xl">
-            🚀
-          </div>
-          <h3 class="text-2xl font-outfit font-bold text-white mb-2">¡Solicitud enviada!</h3>
-          <p class="text-slate-400 text-center px-4 font-outfit font-light">Gracias por tu interés en el private testing. Te contactaremos muy pronto.</p>
+  <main class="relative min-h-[calc(100vh-80px)] overflow-hidden bg-hero-linen">
+    <section class="relative z-10 mx-auto flex max-w-[1240px] flex-1 items-center px-4 py-24 sm:px-6 sm:py-28 md:py-32 lg:px-10">
+      <div class="relative w-full overflow-hidden">
+        <!-- Círculos y formas de color detrás del panel -->
+        <div
+          class="pointer-events-none absolute bottom-[-6%] left-1/2 z-0 w-full max-w-[1180px] -translate-x-1/2"
+          aria-hidden="true"
+        >
+          <svg class="block w-full h-auto" viewBox="0 0 1580.53 171" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <circle cx="85.5" cy="85.5001" r="85.5" fill="#E0EA25" />
+            <circle cx="1495.03" cy="85.5" r="85.5" fill="#5D95FD" />
+            <path d="M251.614 0H885.536V101C885.536 139.66 854.196 171 815.536 171H251.614V0Z" fill="#D4CDFF" />
+            <path d="M1238.53 70C1238.53 31.3401 1207.19 0 1168.53 0H885.536V101C885.536 139.66 916.876 171 955.536 171H1168.53C1207.19 171 1238.53 139.66 1238.53 101V70Z" fill="#FFEBA2" />
+            <path d="M1408.31 84.8893C1408.31 38.0062 1370.3 0 1323.42 0V0C1276.53 0 1238.53 38.3105 1238.53 85.1935V85.1935C1238.53 132.414 1276.81 171 1324.03 171H1408.31V84.8893Z" fill="#F47A49" />
+            <circle cx="257.111" cy="85.5" r="85.5" fill="#8942FE" />
+          </svg>
+          <svg class="-mt-px block w-full h-auto" viewBox="0 0 1580.53 171" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <path d="M80.0034 0H713.925V101C713.925 139.66 682.585 171 643.925 171H80.0034V0Z" fill="#FDE7D7" />
+            <path d="M884 76C884 34.0264 918.026 0 960 0H1504C1507.31 0 1510 2.68629 1510 6V165C1510 168.314 1507.31 171 1504 171H960C918.026 171 884 136.974 884 95V76Z" fill="#DAE6FF" />
+            <path d="M714 86.1107C714 132.994 752.006 171 798.889 171V171C845.772 171 883.779 132.69 883.779 85.8065V85.8065C883.779 38.5861 845.499 0 798.279 0H714V86.1107Z" fill="#FDD543" />
+            <circle cx="85.5" cy="85.5" r="85.5" fill="#F47A49" />
+            <circle cx="1495.03" cy="85.5" r="85.5" fill="#5D49F6" />
+          </svg>
         </div>
 
-        <form id="waitlist-form" class="space-y-5">
-          <div class="space-y-1.5">
-            <label for="companyName" class="text-sm font-outfit font-light text-slate-300 ml-1">Nombre de empresa <span class="text-red-500">*</span></label>
-            <input 
-              type="text" 
-              id="companyName" 
-              name="companyName" 
-              required
-              class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-scalo-accent-violet focus:border-transparent transition-all font-outfit font-light"
-            />
-          </div>
+        <!-- Panel glass exterior -->
+        <div class="waitlist-glass relative z-10 rounded-[24px] border border-white/70 p-5 sm:rounded-[32px] sm:p-6 md:rounded-[50px] md:p-10 lg:p-12">
+          <div class="grid items-center gap-8 sm:gap-10 md:grid-cols-2 md:gap-10 lg:gap-14 xl:gap-20">
+            <div class="animate-reveal space-y-4 px-0 sm:space-y-5 md:space-y-6 md:px-2" style="transition-delay: 0.1s">
+              <h1 class="font-outfit text-[1.65rem] font-bold leading-[1.08] tracking-[-0.03em] text-scalo-primary-dark sm:text-[1.9rem] md:text-[2.35rem] lg:text-[2.65rem] xl:text-[2.85rem]">
+                Accede al private testing de Scalo
+              </h1>
+              <p class="font-outfit text-base font-semibold leading-relaxed text-deep-navy/80 sm:text-lg md:text-xl">
+                Sé parte del grupo exclusivo que está probando la próxima generación de decisiones basadas en datos.
+              </p>
+              <p class="font-outfit text-sm font-light leading-relaxed text-deep-navy/60 sm:text-base md:text-lg">
+                Obtén acceso anticipado, influye en el producto y descubre antes que nadie cómo convertir tus datos en crecimiento real.
+              </p>
+            </div>
 
-          <div class="space-y-1.5">
-            <label for="founderName" class="text-sm font-outfit font-light text-slate-300 ml-1">Nombre del founder <span class="text-red-500">*</span></label>
-            <input 
-              type="text" 
-              id="founderName" 
-              name="founderName" 
-              required
-              class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-scalo-accent-violet focus:border-transparent transition-all font-outfit font-light"
-            />
-          </div>
+            <!-- Formulario navy -->
+            <div class="animate-reveal mx-auto w-full max-w-[574px] lg:mx-0 lg:ml-auto" style="transition-delay: 0.2s">
+              <div class="waitlist-form-box relative overflow-hidden rounded-[28px] p-6 md:rounded-[35px] md:p-8 lg:p-9">
+                <div id="waitlist-success" class="absolute inset-0 z-20 hidden flex-col items-center justify-center rounded-[28px] bg-deep-navy/95 backdrop-blur md:rounded-[35px]">
+                  <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-scalo-primary/20 text-3xl text-scalo-primary-50">🚀</div>
+                  <h3 class="mb-2 font-outfit text-2xl font-bold text-white">¡Solicitud enviada!</h3>
+                  <p class="px-6 text-center font-outfit font-light text-white/70">Gracias por tu interés. Te contactaremos muy pronto.</p>
+                </div>
 
-          <div class="space-y-1.5">
-            <label for="founderEmail" class="text-sm font-outfit font-light text-slate-300 ml-1">Correo del founder <span class="text-red-500">*</span></label>
-            <input 
-              type="email" 
-              id="founderEmail" 
-              name="founderEmail" 
-              required
-              class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-scalo-accent-violet focus:border-transparent transition-all font-outfit font-light"
-            />
-          </div>
+                <form id="waitlist-form" class="space-y-4">
+                  {fields.map((field) => (
+                    <div class="space-y-1.5">
+                      <label for={field.id} class="ml-0.5 font-outfit text-xs text-white/85 md:text-sm">
+                        {field.label} <span class="text-[#ff5a5a]">*</span>
+                      </label>
+                      <input
+                        type={field.type}
+                        id={field.id}
+                        name={field.name}
+                        required
+                        class="waitlist-input w-full"
+                      />
+                    </div>
+                  ))}
 
-          <div class="space-y-1.5">
-            <label for="industry" class="text-sm font-outfit font-light text-slate-300 ml-1">Rubro de la empresa <span class="text-red-500">*</span></label>
-            <input 
-              type="text" 
-              id="industry" 
-              name="industry" 
-              required
-              class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-scalo-accent-violet focus:border-transparent transition-all font-outfit font-light"
-            />
-          </div>
+                  <div id="waitlist-error" class="hidden py-1 text-center text-sm font-medium text-[#ff8a8a]"></div>
 
-          <!-- Error Message -->
-          <div id="waitlist-error" class="hidden text-red-400 text-sm py-1 font-medium text-center">
-            Ocurrió un error. Por favor, intenta nuevamente.
+                  <button
+                    type="submit"
+                    id="waitlist-submit"
+                    class="waitlist-submit-btn relative mt-2 flex h-[53px] w-full items-center justify-center"
+                  >
+                    <span id="waitlist-btn-text" class="relative z-10 font-outfit text-sm font-black uppercase tracking-[0.18em] text-white md:text-[15px]">
+                      Solicitar acceso
+                    </span>
+                    <svg id="waitlist-spinner" class="absolute hidden h-5 w-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
-
-          <button 
-            type="submit" 
-            id="waitlist-submit"
-            class="w-full bg-scalo-accent-violet hover:bg-scalo-accent-violet/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group relative overflow-hidden mt-6"
-          >
-            <span class="relative z-10 flex items-center gap-2 font-outfit font-bold">
-              Solicitar acceso
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </span>
-            <!-- Loading Spinner -->
-            <svg id="waitlist-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-          </button>
-        </form>
+        </div>
       </div>
     </section>
   </main>
 
   <Footer />
 
+  <style>
+    .waitlist-glass {
+      background: rgba(255, 255, 255, 0.42);
+      box-shadow: 0 4px 24px rgba(35, 18, 70, 0.1);
+      -webkit-backdrop-filter: blur(16px) saturate(1.15);
+      backdrop-filter: blur(16px) saturate(1.15);
+    }
+
+    .waitlist-form-box {
+      background: #100e32;
+      box-shadow: 0 8px 28px rgba(16, 14, 50, 0.28);
+    }
+
+    .waitlist-input {
+      height: 52px;
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0 1rem;
+      font-family: var(--font-outfit);
+      font-size: 0.95rem;
+      color: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .waitlist-input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .waitlist-input:focus {
+      outline: none;
+      border-color: rgba(93, 73, 246, 0.55);
+      background: rgba(255, 255, 255, 0.11);
+      box-shadow: 0 0 0 3px rgba(93, 73, 246, 0.2);
+    }
+
+    .waitlist-submit-btn {
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #5d95fd 0%, #5d49f6 52%, #282689 100%);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .waitlist-submit-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(93, 73, 246, 0.35);
+    }
+
+    .waitlist-submit-btn:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+  </style>
+
   <script>
     const form = document.getElementById('waitlist-form') as HTMLFormElement;
     const submitBtn = document.getElementById('waitlist-submit') as HTMLButtonElement;
     const spinner = document.getElementById('waitlist-spinner') as HTMLElement;
-    const btnText = submitBtn?.querySelector('span') as HTMLElement;
+    const btnText = document.getElementById('waitlist-btn-text') as HTMLElement;
     const successMsg = document.getElementById('waitlist-success') as HTMLElement;
     const errorMsg = document.getElementById('waitlist-error') as HTMLElement;
 
     if (form) {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
         const formData = new FormData(form);
         const founderEmail = formData.get('founderEmail') as string;
-        
-        // Email regex basic validation
+        const contactPhone = formData.get('contactPhone') as string;
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(founderEmail)) {
-          errorMsg.textContent = "Por favor ingresa un correo válido.";
+          errorMsg.textContent = 'Por favor ingresa un correo válido.';
+          errorMsg.classList.remove('hidden');
+          return;
+        }
+        if (contactPhone.replace(/\D/g, '').length < 8) {
+          errorMsg.textContent = 'Por favor ingresa un número de contacto válido.';
           errorMsg.classList.remove('hidden');
           return;
         }
 
         submitBtn.disabled = true;
-        submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
         btnText.classList.add('invisible');
         spinner.classList.remove('hidden');
         errorMsg.classList.add('hidden');
 
         try {
-          const response = await fetch('/api/waitlist', {
-            method: 'POST',
-            body: formData,
-          });
-
+          const response = await fetch('/api/waitlist', { method: 'POST', body: formData });
           const result = await response.json();
-
-          if (!response.ok) {
-            throw new Error(result.error || 'Network error');
-          }
-
+          if (!response.ok) throw new Error(result.error || 'Network error');
           successMsg.classList.remove('hidden');
+          successMsg.classList.add('flex');
           form.reset();
-          
         } catch (error) {
           console.error('Error submitting waitlist:', error);
-          errorMsg.textContent = "Ocurrió un error. Por favor, intenta nuevamente.";
+          errorMsg.textContent = 'Ocurrió un error. Por favor, intenta nuevamente.';
           errorMsg.classList.remove('hidden');
         } finally {
           submitBtn.disabled = false;
-          submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
           btnText.classList.remove('invisible');
           spinner.classList.add('hidden');
         }
       });
     }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.animate-reveal').forEach((el) => observer.observe(el));
   </script>
 </Layout>

@@ -1,0 +1,181 @@
+---
+const blocks = [
+  {
+    title: 'Scalo es tu copiloto estratégico para toma de decisiones',
+    descriptionBefore: 'Scalo conecta lo que pasa dentro de tu empresa con lo que está pasando en tu industria, tendencias, cambios en el mercado, movimientos de la competencia y ',
+    descriptionBold: 'te entrega recomendaciones en lenguaje claro, para que tomes mejores decisiones hoy.',
+    image: '/images/home/feature-1.png',
+    imageWebp: '/images/home/feature-1.webp',
+    imagePosition: 'left' as const,
+    bg: 'bg-[#5f49d9]',
+  },
+  {
+    title: 'Lo que antes requería un consultor, ahora lo tienes disponible',
+    descriptionBold: 'Scalo monitorea las áreas críticas de tu negocio ',
+    descriptionAfter: 'y te alerta cuando algo requiere tu atención antes de que se convierta en un problema.',
+    image: '/images/home/feature-2.png',
+    imageWebp: '/images/home/feature-2.webp',
+    imagePosition: 'right' as const,
+    bg: 'bg-[#211b8f]',
+  },
+  {
+    title: 'De los datos a la decisión, sin pasos intermedios.',
+    descriptionBefore: 'Olvídate de interpretar reportes complejos. Scalo analiza la información de tu empresa, detecta oportunidades y riesgos, y ',
+    descriptionBold: 'te propone planes de acción claros para que puedas tomar mejores decisiones con confianza.',
+    image: '/images/home/feature-3.png',
+    imageWebp: '/images/home/feature-3.webp',
+    imagePosition: 'left' as const,
+    bg: 'bg-[#0f0d35]',
+  },
+];
+---
+
+<section id="producto" class="overflow-hidden bg-white pb-8 md:pb-10">
+  <div class="feature-stack mx-auto w-full max-w-[1440px] overflow-hidden rounded-[28px] bg-[#0f0d35] sm:rounded-[36px] md:rounded-[64px] lg:rounded-[88px]">
+    {blocks.map((block, index) => (
+      <div
+        class:list={[
+          'feature-band relative overflow-hidden',
+          block.bg,
+          index === 0 ? 'rounded-t-[36px] md:rounded-t-[64px] lg:rounded-t-[88px]' : '-mt-6 rounded-t-[28px] sm:-mt-8 sm:rounded-t-[32px] md:-mt-14 md:rounded-t-[64px] lg:-mt-16 lg:rounded-t-[88px]',
+          index === blocks.length - 1 ? 'rounded-b-[36px] md:rounded-b-[64px] lg:rounded-b-[88px]' : '',
+        ]}
+      >
+        <div class="absolute inset-0 opacity-30" aria-hidden="true">
+          <img src="/images/home/bg-ellipses.png" alt="" class="h-full w-full scale-125 object-cover" />
+        </div>
+
+        <div
+          class:list={[
+            'relative px-4 sm:px-6 md:px-14 lg:px-16 xl:px-20',
+            index === 0 ? 'pt-12 pb-12 sm:pt-14 md:pt-20 md:pb-20 lg:pt-[88px] lg:pb-[88px]' : 'pt-16 pb-12 sm:pt-20 md:pt-28 md:pb-20 lg:pt-[148px] lg:pb-[88px]',
+          ]}
+        >
+          <div
+            class:list={[
+              'feature-row mx-auto flex w-full max-w-[1080px] flex-col items-center gap-10 md:gap-12 lg:gap-16 xl:gap-20',
+              block.imagePosition === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row',
+            ]}
+          >
+            <!-- Image card -->
+            <div class="feature-reveal w-full shrink-0 lg:w-[48%] lg:max-w-[647px]" style={`transition-delay: ${index * 0.12}s`}>
+              <div class="feature-img-box mx-auto lg:mx-0">
+                <div class="relative overflow-hidden rounded-[22px] bg-black/10 shadow-[2px_2px_10px_0px_rgba(16,14,50,0.5)] md:rounded-[30px]">
+                  <picture>
+                    <source srcset={block.imageWebp} type="image/webp" />
+                    <img
+                      src={block.image}
+                      alt={block.title}
+                      class="aspect-[468/304] w-full object-cover object-center"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding={index === 0 ? 'sync' : 'async'}
+                      fetchpriority={index === 0 ? 'high' : 'low'}
+                      width="936"
+                      height="608"
+                    />
+                  </picture>
+                </div>
+                <a
+                  href="/waitlist"
+                  class="mt-5 flex h-[45px] w-full items-center justify-center rounded-full bg-white/50 text-[11px] font-extrabold uppercase tracking-[1.5px] text-white transition-colors hover:bg-white/65 sm:text-[13px] sm:tracking-[3px] md:tracking-[5px] md:text-sm"
+                >
+                  comenzar ahora
+                </a>
+              </div>
+            </div>
+
+            <!-- Text -->
+            <div
+              class="feature-reveal w-full shrink-0 space-y-4 md:space-y-5 lg:w-[48%] lg:max-w-[520px]"
+              style={`transition-delay: ${index * 0.12 + 0.1}s`}
+            >
+              <h2 class="feature-heading max-w-[520px] font-outfit text-[1.55rem] font-bold leading-[1.05] tracking-[-0.03em] text-white sm:text-3xl md:text-4xl lg:text-[3rem] xl:text-[52px]">
+                {block.title}
+              </h2>
+              <p class="feature-copy max-w-[520px] font-outfit text-sm font-light leading-[1.32] text-white/90 md:text-base lg:text-[17px]">
+                {block.descriptionBefore && <span>{block.descriptionBefore}</span>}
+                {block.descriptionBold && <strong class="font-semibold text-white">{block.descriptionBold}</strong>}
+                {block.descriptionAfter && <span>{block.descriptionAfter}</span>}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.feature-reveal').forEach((el) => observer.observe(el));
+</script>
+
+<style>
+  .feature-row {
+    justify-content: center;
+  }
+
+  .feature-img-box {
+    background: rgba(217, 217, 217, 0.2);
+    border-radius: 35px;
+    padding: 1.25rem;
+    max-width: 600px;
+    transform: translateZ(0);
+  }
+
+  @media (min-width: 768px) {
+    .feature-img-box {
+      padding: 1.5rem;
+      max-width: 640px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .feature-band {
+      min-height: 520px;
+    }
+
+    .feature-img-box {
+      padding: 2rem;
+      max-width: 647px;
+    }
+
+    .feature-row {
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .feature-band {
+      min-height: 580px;
+    }
+  }
+
+  .feature-reveal {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    will-change: opacity, transform;
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .feature-reveal.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

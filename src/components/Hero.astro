@@ -1,120 +1,36 @@
 ---
-import AnimatedHeroCharts from './react/AnimatedHeroCharts';
-import Grainient from './react/Grainient-JS-CSS';
 ---
 
-<section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-  <!-- Interactive Background from ReactBits -->
-  <div class="absolute inset-0 w-full h-full z-[-15] pointer-events-none overflow-hidden">
-    <Grainient
-      client:only="react"
-      className="w-full h-full"
-      color1="#260947"
-      color2="#5d3497"
-      color3="#3b175f"
-      timeSpeed={0.5}
-      colorBalance={0}
-      warpStrength={0.6}
-      warpFrequency={4}
-      warpSpeed={1.2}
-      warpAmplitude={60}
-      blendAngle={0}
-      blendSoftness={0.05}
-      rotationAmount={300}
-      noiseScale={2}
-      grainAmount={0}
-      grainScale={2}
-      grainAnimated={false}
-      contrast={1.4}
-      gamma={1}
-      saturation={1}
-      centerX={0}
-      centerY={0}
-      zoom={0.75}
-    />
-  </div>
+<section id="inicio" class="relative overflow-hidden bg-hero-linen pt-24 pb-10 sm:pt-28 sm:pb-12 md:pt-36 md:pb-20">
+  <div class="container mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="glass-panel relative rounded-[24px] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] sm:rounded-[32px] sm:p-6 md:rounded-[50px] md:p-10 lg:p-14">
+      <div class="grid items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+        <div class="animate-reveal space-y-5 sm:space-y-6 md:space-y-8" style="transition-delay: 0.1s">
+          <h1 class="font-outfit text-[1.75rem] font-bold leading-[1.08] tracking-tight text-deep-navy sm:text-4xl md:text-5xl lg:text-[3.25rem]">
+            Los datos no escalan empresas, las decisiones sí.
+          </h1>
+          <p class="max-w-xl font-outfit text-[15px] font-normal leading-relaxed text-deep-navy/65 sm:text-lg md:text-xl">
+            Scalo convierte la información de tu empresa en decisiones concretas. Sin reportes que nadie lee. Sin consultores caros. Sin tener que ser experto en datos.
+          </p>
+          <a
+            href="/waitlist"
+            class="btn-scalo-primary inline-flex h-[48px] w-full items-center justify-center px-6 text-base tracking-wide sm:h-[52px] sm:w-auto sm:px-8 sm:text-lg md:h-[59px] md:text-xl lg:text-2xl"
+          >
+            Acceso anticipado
+          </a>
+        </div>
 
-  <div class="container mx-auto px-6 relative z-10 text-center">
-    <!-- Title -->
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-outfit font-bold mb-8 leading-[1.1] animate-reveal opacity-0 tracking-normal" style="animation-delay: 0.2s">
-      <span class="bg-clip-text text-transparent bg-linear-to-r from-white via-white to-white/40 drop-shadow-sm">
-        Los datos no escalan empresas. <br />
-      </span>
-      <span class="bg-clip-text text-transparent bg-linear-to-r from-scalo-primary via-scalo-accent-violet to-scalo-accent-cyan animate-gradient-slow bg-size-[200%_200%]">
-        Las decisiones sí.
-      </span>
-    </h1>
-
-    <!-- Subtitle -->
-    <p class="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-10 leading-relaxed animate-reveal opacity-0 font-outfit font-normal" style="animation-delay: 0.3s">
-      <b>Scalo</b> centraliza la información de tu empresa, <b>detecta oportunidades automáticamente</b> y te dice exactamente <b>qué hacer para crecer</b>.
-    </p>
-
-    <!-- Hero CTA -->
-    <div class="flex justify-center mb-16 animate-reveal opacity-0" style="animation-delay: 0.4s">
-      <a 
-        href="/waitlist" 
-        class="group flex items-center gap-3 bg-scalo-accent-violet hover:bg-scalo-accent-violet/90 text-white px-8 py-3.5 rounded-full font-outfit font-bold text-[17px] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(139,92,246,0.7)]"
-      >
-        <span>Acceder al Private Testing</span>
-        <svg class="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-      </a>
+        <div class="relative animate-reveal lg:pl-4" style="transition-delay: 0.25s">
+          <img
+            src="/images/home/mockup.png"
+            alt="Dashboard de Scalo en tablet"
+            class="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(16,14,50,0.15)] animate-float"
+            loading="eager"
+            width="669"
+            height="521"
+          />
+        </div>
+      </div>
     </div>
-    <!-- React Interactive Dashboard Island -->
-    <AnimatedHeroCharts client:visible />
-
   </div>
 </section>
-
- 
-
-<script>
-  // Number Counter Animation Logic
-  document.addEventListener('DOMContentLoaded', () => {
-    const observerOptions = {
-      threshold: 0.5,
-      rootMargin: "0px 0px -50px 0px"
-    };
-
-    const animateValue = (obj: Element, start: number, end: number, duration: number, isDecimal: boolean) => {
-      let startTimestamp: number | null = null;
-      const step = (timestamp: number) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        // Easing out function
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        const currentVal = start + easeOut * (end - start);
-        
-        if (isDecimal) {
-            obj.innerHTML = currentVal.toFixed(1);
-        } else {
-            obj.innerHTML = Math.floor(currentVal).toString();
-        }
-        
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      };
-      window.requestAnimationFrame(step);
-    }
-
-    const counterObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const targetStr = (entry.target as HTMLElement).dataset.target;
-          if (targetStr) {
-            const targetVal = parseFloat(targetStr);
-            const isDecimal = entry.target.classList.contains('animated-decimal');
-            animateValue(entry.target, 0, targetVal, 2000, isDecimal);
-          }
-          // Unobserve after animating once
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.animated-counter, .animated-decimal').forEach(counter => {
-      counterObserver.observe(counter);
-    });
-  });
-</script>

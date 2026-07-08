@@ -7,10 +7,11 @@ export const POST: APIRoute = async ({ request }) => {
     const companyName = data.get('companyName');
     const founderName = data.get('founderName');
     const founderEmail = data.get('founderEmail');
+    const contactPhone = data.get('contactPhone');
     const industry = data.get('industry');
 
     // 2. Validate basic required fields
-    if (!companyName || !founderName || !founderEmail || !industry) {
+    if (!companyName || !founderName || !founderEmail || !contactPhone || !industry) {
       return new Response(
         JSON.stringify({ error: 'Todos los campos son requeridos.' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
@@ -33,11 +34,12 @@ export const POST: APIRoute = async ({ request }) => {
     // 4. Prepare Markdown content
     const dateStr = new Date().toISOString();
     const markdownContent = `
-# Nuevo Registro de Private Testing
+# Nuevo Registro de Acceso Anticipado
 
 - **Empresa:** ${companyName}
 - **Founder:** ${founderName}
 - **Correo:** ${founderEmail}
+- **Teléfono:** ${contactPhone}
 - **Rubro:** ${industry}
 - **Fecha:** ${dateStr}
 `;

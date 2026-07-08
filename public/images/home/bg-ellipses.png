@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 3451 3623" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Fondo seccion 2" filter="url(#filter0_f_0_10575)">
+<circle id="Ellipse 1" cx="1411.5" cy="1366.5" r="405.5" fill="var(--fill-0, #362AD8)"/>
+<circle id="Ellipse 3" cx="1411.5" cy="2617.5" r="405.5" fill="var(--fill-0, #282689)"/>
+<circle id="Ellipse 2" cx="2222.5" cy="1366.5" r="405.5" fill="var(--fill-0, #282689)"/>
+<circle id="Ellipse 4" cx="2222.5" cy="2617.5" r="405.5" fill="var(--fill-0, #362AD8)"/>
+<circle id="Ellipse 6" cx="2445.5" cy="2102.5" r="405.5" fill="var(--fill-0, #100E32)"/>
+<circle id="Ellipse 7" cx="1005.5" cy="2102.5" r="405.5" fill="var(--fill-0, #100E32)"/>
+<circle id="Ellipse 8" cx="1005.5" cy="1005.5" r="405.5" fill="var(--fill-0, #100E32)"/>
+<circle id="Ellipse 9" cx="2445.5" cy="1005.5" r="405.5" fill="var(--fill-0, #100E32)"/>
+<circle id="Ellipse 5" cx="1816.5" cy="1982.5" r="405.5" fill="var(--fill-0, #6425DD)"/>
+</g>
+<defs>
+<filter id="filter0_f_0_10575" x="0" y="0" width="3451" height="3623" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="300" result="effect1_foregroundBlur_0_10575"/>
+</filter>
+</defs>
+</svg>

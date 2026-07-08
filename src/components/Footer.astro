@@ -2,50 +2,71 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="py-20 bg-deep-navy border-t border-white/5 relative overflow-hidden">
-  <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between gap-16 md:gap-8 mb-20 md:mb-32 relative z-10 mt-10">
-    <!-- Brand Info (Left) -->
-    <div class="md:w-1/2 flex flex-col justify-center">
-      <div class="mb-10">
-        <img id="footer-logo" src="/Scalo-logoWhite.png" alt="Scalo" class="h-16 md:h-20 w-auto" />
+<footer
+  id="contacto"
+  class="relative z-20 mx-4 overflow-hidden rounded-t-[40px] bg-deep-navy pt-11 pb-7 shadow-[0_-6px_16px_rgba(16,14,50,0.2)] sm:mx-5 sm:rounded-t-[56px] sm:pt-12 md:mx-8 md:rounded-t-[80px] md:pb-8 md:pt-14 md:mt-[-52px] lg:mx-auto lg:mt-[-60px] lg:max-w-[1284px] lg:rounded-t-[96px] lg:pt-16"
+>
+  <div class="mx-auto max-w-[1040px] px-5 sm:px-8 md:px-12 lg:px-14">
+    <div class="mb-9 grid gap-9 sm:mb-10 sm:gap-10 md:mb-12 md:grid-cols-2 md:gap-16">
+      <div>
+        <img src="/images/home/logo-white.png" alt="Scalo" class="mb-5 h-10 w-auto md:h-11" />
+        <p class="mb-4 max-w-[270px] font-outfit text-[13px] leading-snug text-white/85 md:text-sm">
+          Tus datos ya existen. Scalo los convierte en decisiones estratégicas que generan crecimiento.
+        </p>
+        <a
+          href="mailto:hola@scalolatam.com"
+          class="font-outfit text-[13px] text-scalo-primary-50 transition-colors hover:text-white md:text-sm"
+        >
+          hola@scalolatam.com
+        </a>
       </div>
-      <p class="text-white text-base md:text-[17px] leading-relaxed font-outfit font-light max-w-md">
-        Transformando datos complejos en decisiones estratégicas efectivas. Nuestra misión es empoderar a la próxima generación de startups.
-      </p>
-    </div>
 
-    <!-- Links & Socials (Right) -->
-    <div class="md:w-1/2 flex flex-col md:items-end justify-center">
-      <div class="w-full max-w-sm flex flex-col gap-14">
-        <!-- Grid Links -->
-        <div class="grid grid-cols-2 gap-x-8 gap-y-5 text-white font-outfit font-normal text-[15px]">
-          <a href="/#features" class="hover:text-scalo-accent-cyan transition-colors">Funcionalidades</a>
-          <a href="/#problema" class="hover:text-scalo-accent-cyan transition-colors">El problema</a>
-          <a href="/#soluciones" class="hover:text-scalo-accent-cyan transition-colors">Soluciones</a>
-          <a href="/blog" class="hover:text-scalo-accent-cyan transition-colors">Insights</a>
-          <a href="/waitlist" class="hover:text-scalo-accent-cyan transition-colors">Private testing</a>
-          <a href="mailto:hola@iterocompany.com" class="hover:text-scalo-accent-cyan transition-colors">Contacto</a>
+      <div class="flex flex-col gap-7 md:items-end">
+        <div class="grid grid-cols-2 gap-x-8 gap-y-3 font-outfit text-[13px] text-white sm:gap-x-12 md:gap-x-16 md:text-sm">
+          <a href="/#producto" class="transition-colors hover:text-scalo-primary-50">Producto</a>
+          <a href="/#faqs" class="transition-colors hover:text-scalo-primary-50">Precio</a>
+          <a href="/#acerca" class="transition-colors hover:text-scalo-primary-50">Acerca</a>
+          <a href="/#contacto" class="transition-colors hover:text-scalo-primary-50">Contacto</a>
         </div>
 
-        <!-- Socials -->
-        <div>
-          <h4 class="text-[22px] text-white font-outfit font-bold mb-5 tracking-tight">Síganos en redes sociales</h4>
-          <div class="flex items-center gap-6 text-white font-outfit font-normal text-[15px]">
-            <a href="https://www.linkedin.com/company/scalolatam/" class="hover:text-scalo-accent-cyan transition-colors">LinkedIn</a>
-            <a href="https://www.instagram.com/scalolatam/" class="hover:text-scalo-accent-cyan transition-colors">Instagram</a>
+        <div class="md:text-right">
+          <h4 class="mb-3 font-outfit text-[13px] font-bold text-white md:text-sm">Síganos en redes sociales</h4>
+          <div class="flex items-center gap-2 md:justify-end">
+            <a
+              href="https://www.linkedin.com/company/scalolatam/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 hover:text-scalo-primary-50"
+              aria-label="LinkedIn"
+            >
+              <svg class="h-[18px] w-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.126 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/scalolatam/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 hover:text-scalo-primary-50"
+              aria-label="Instagram"
+            >
+              <svg class="h-[18px] w-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+            </a>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="container mx-auto px-6 relative z-10 text-center font-outfit font-light text-slate-300 text-[15px]">
-    <p>
-      Un producto de <a href="https://iterocompany.com/" rel="Itero Company" class="text-white hover:text-scalo-accent-cyan transition-colors font-normal">Itero Company</a> • Hecho con ❤️ por scalo team
-    </p>
+    <div class="pt-1 text-center">
+      <p class="font-outfit text-[11px] uppercase tracking-[0.32em] text-white/55 sm:tracking-[0.38em] md:text-xs">
+        Un producto de
+        <a href="https://iterocompany.com/" class="text-white/75 underline underline-offset-[5px] transition-colors hover:text-white">
+          Itero Company
+        </a>
+        <span class="sr-only"> · © {currentYear} Scalo.</span>
+      </p>
+    </div>
   </div>
-  
-  <!-- Subtle Gradient Decoration -->
-  <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-scalo-primary/10 blur-[120px] rounded-full"></div>
-  <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-scalo-accent-violet/10 blur-[120px] rounded-full"></div>
 </footer>

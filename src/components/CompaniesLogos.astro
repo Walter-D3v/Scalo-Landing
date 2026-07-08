@@ -1,0 +1,39 @@
+---
+const logos = [
+  { src: '/images/home/logo-a.png', alt: 'Empresa A' },
+  { src: '/images/home/logo-b.png', alt: 'Empresa B' },
+  { src: '/images/home/logo-c.png', alt: 'Empresa C' },
+  { src: '/images/home/logo-d.png', alt: 'Empresa D' },
+];
+const marqueeLogos = [...logos, ...logos];
+---
+
+<section id="acerca" class="overflow-hidden bg-white py-12 sm:py-14 md:py-20">
+  <div class="container mx-auto mb-8 max-w-5xl px-4 text-center sm:mb-10 sm:px-6 md:mb-14">
+    <p class="section-eyebrow mb-4 animate-reveal">
+      Un grupo selecto de pymes está usando Scalo hoy y dando forma a lo que será la plataforma definitiva.
+    </p>
+    <h2 class="section-title animate-reveal" style="transition-delay: 0.1s">
+      Empresas que ya están construyendo el futuro con Scalo.
+    </h2>
+  </div>
+
+  <div class="relative animate-reveal" style="transition-delay: 0.2s">
+    <div class="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+    <div class="flex w-max animate-marquee gap-12 md:gap-20 px-6">
+      {marqueeLogos.map((logo, i) => (
+        <img
+          src={logo.src}
+          alt={logo.alt}
+          class="h-12 w-auto flex-shrink-0 object-contain opacity-50 grayscale sm:h-14 md:h-20 lg:h-[92px]"
+          loading="lazy"
+          width="238"
+          height="92"
+          aria-hidden={i >= logos.length}
+        />
+      ))}
+    </div>
+  </div>
+</section>

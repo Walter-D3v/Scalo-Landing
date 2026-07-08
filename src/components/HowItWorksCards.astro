@@ -1,0 +1,86 @@
+---
+const steps = [
+  {
+    number: '1',
+    title: 'Conecta tu negocio',
+    titleLines: ['Conecta', 'tu negocio'],
+    description: 'Conecta la información de tu empresa en un solo lugar, sin complicaciones.',
+  },
+  {
+    number: '2',
+    title: 'Scalo analiza',
+    description: 'La plataforma cruza tu información interna con tendencias de tu industria y detecta lo que importa antes de que tú lo veas.',
+  },
+  {
+    number: '3',
+    title: 'Tú decides',
+    description: 'Recibes recomendaciones concretas en lenguaje claro. Sin reportes que nadie lee. Sin incertidumbre.',
+  },
+];
+---
+
+<section id="como-funciona" class="bg-gradient-to-b from-white via-[#FDFAF6] to-white-linen py-12 md:py-16 lg:py-[72px]">
+  <div class="container mx-auto max-w-[1120px] px-4 sm:px-6">
+    <div class="animate-reveal mb-9 text-center md:mb-11 lg:mb-12">
+      <h2 class="mb-2 font-outfit text-[1.75rem] font-bold leading-tight tracking-tight text-deep-navy sm:text-3xl md:text-4xl lg:text-[2.65rem]">
+        ¿Cómo funciona?
+      </h2>
+      <p class="font-outfit text-[15px] font-semibold text-deep-navy/55 md:text-[17px]">
+        Tres pasos. Sin curva de aprendizaje.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
+      {steps.map((step, i) => (
+        <article
+          class="how-card relative bg-white rounded-[22px] md:rounded-[24px] lg:rounded-[26px] shadow-[0_6px_18px_rgba(16,14,50,0.16)] overflow-hidden flex flex-col animate-reveal"
+          style={`transition-delay: ${0.1 + i * 0.1}s`}
+        >
+          <div class="relative flex-shrink-0 h-[132px] md:h-[150px] lg:h-[165px] overflow-hidden" aria-hidden="true">
+            <span class="how-card-number absolute -top-1 left-5 md:left-6 font-outfit font-extrabold text-[#EDE5DC] select-none leading-none">
+              {step.number}
+            </span>
+          </div>
+
+          <div class="relative -mt-2 flex flex-1 flex-col px-5 pb-7 sm:px-6 md:-mt-3 md:px-8 md:pb-9">
+            {step.titleLines ? (
+              <h3 class="mb-3 font-outfit text-xl font-bold leading-[1.12] tracking-[-0.025em] text-deep-navy sm:text-2xl md:text-[1.7rem] lg:text-[1.85rem]">
+                {step.titleLines.map((line) => (
+                  <span class="block">{line}</span>
+                ))}
+              </h3>
+            ) : (
+              <h3 class="mb-3 font-outfit text-xl font-bold leading-[1.12] tracking-[-0.025em] text-deep-navy sm:text-2xl md:text-[1.7rem] lg:text-[1.85rem]">
+                {step.title}
+              </h3>
+            )}
+            <p class="text-[15px] md:text-base lg:text-[17px] text-deep-navy/70 font-outfit font-semibold leading-[1.22]">
+              {step.description}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-card {
+    min-height: auto;
+  }
+  @media (min-width: 640px) {
+    .how-card {
+      min-height: 290px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .how-card {
+      min-height: 338px;
+    }
+  }
+
+  .how-card-number {
+    font-size: clamp(8.75rem, 14vw, 12.5rem);
+    letter-spacing: -0.055em;
+  }
+</style>

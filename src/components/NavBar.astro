@@ -1,192 +1,200 @@
 ---
-import { getLandingSectionsConfig } from '../lib/content-island';
+interface Props {
+  variant?: 'light' | 'dark';
+}
 
-const sectionsConfig = await getLandingSectionsConfig();
-
-const getBool = (config: any, fieldName: string): boolean => {
-  if (!config) return true;
-  const lower = fieldName.toLowerCase();
-  if (typeof config[fieldName] === 'boolean') return config[fieldName];
-  if (typeof config[lower] === 'boolean') return config[lower];
-  if (typeof config.fields?.[fieldName] === 'boolean') return config.fields[fieldName];
-  if (typeof config.fields?.[lower] === 'boolean') return config.fields[lower];
-  return true;
-};
-
-const showProblem = getBool(sectionsConfig, 'ProblemSection');
-const showFeatures = getBool(sectionsConfig, 'Features');
-const showHowItWorks = getBool(sectionsConfig, 'HowItWorks');
-const showTestimonials = getBool(sectionsConfig, 'Testimonials');
-const showBlog = getBool(sectionsConfig, 'Blog');
+const { variant = 'light' } = Astro.props;
 
 const navLinks = [
-  ...(showProblem ? [{ name: 'Por qué Scalo', href: '/#problema' }] : []),
-  ...(showFeatures ? [{ name: 'Features', href: '/#features' }] : []),
-  ...(showHowItWorks ? [{ name: 'Cómo funciona', href: '/#como-funciona' }] : []),
-  ...(showTestimonials ? [{ name: 'Soluciones', href: '/#soluciones' }] : []),
-  ...(showBlog ? [{ name: 'Blog', href: '/blog' }] : []),
+  { name: 'Inicio', href: '/#inicio', id: 'inicio' },
+  { name: 'Producto', href: '/#producto', id: 'producto' },
+  { name: 'Acerca', href: '/#acerca', id: 'acerca' },
+  { name: 'Precio', href: '/#faqs', id: 'faqs' },
+  { name: 'Contacto', href: '/#contacto', id: 'contacto' },
 ];
 ---
 
-<!--
-  Estado inicial  → barra completa ancho full, py-4
-  Tras scroll >40 → isla flotante centrada, compacta, pill shape
--->
 <header
   id="main-header"
-  class="fixed top-0 left-0 w-full z-50 flex justify-center px-4 pt-4 transition-all duration-500 pointer-events-none"
+  class="pointer-events-none fixed top-0 left-0 z-50 flex w-full justify-center px-4 pt-5 transition-all duration-500 ease-out md:px-6"
 >
   <nav
     id="main-nav"
-    class="
-      w-full max-w-7xl
-      glass px-6 py-3 rounded-2xl
-      flex items-center
-      border border-white/5
-      transition-all duration-500
-      pointer-events-auto
-    "
+    class:list={[
+      'pointer-events-auto flex w-full max-w-[1280px] items-center justify-between gap-4 transition-all duration-500 ease-out',
+      variant === 'light'
+        ? 'rounded-full border border-black/[0.04] bg-white px-6 py-3 md:px-8 md:py-3'
+        : 'glass rounded-full border border-white/10 px-8 py-3',
+    ]}
   >
-    <!-- Logo -->
-    <div class="flex-1 flex justify-start">
-      <a href="/" class="flex items-center gap-2 group flex-shrink-0" aria-label="Volver al inicio">
+    <a href="/" class="group flex shrink-0 items-center" aria-label="Volver al inicio">
       <img
         id="nav-logo"
-        src="/Scalo-logoWhite.png"
+        src={variant === 'light' ? '/images/home/logo-color-nav.png' : '/Scalo-logoWhite.png'}
         alt="Scalo"
-        class="h-10 w-auto group-hover:scale-105 transition-all duration-500"
+        class="h-5 w-auto transition-all duration-500 group-hover:opacity-90 md:h-[22px] lg:h-6"
       />
+    </a>
+
+    <div id="nav-right" class="hidden items-center gap-3 md:flex lg:gap-6 xl:gap-8">
+      <ul id="nav-links" class="flex items-center gap-0.5 lg:gap-1 xl:gap-2" role="menubar">
+        {navLinks.map((link) => (
+          <li role="none">
+            <a
+              href={link.href}
+              role="menuitem"
+              data-section={link.id}
+              class:list={[
+                'nav-link rounded-full px-3 py-2 font-outfit text-[13px] font-medium tracking-wide transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-scalo-primary/40 md:px-3.5 lg:px-4 lg:text-[15px]',
+                variant === 'light'
+                  ? 'text-deep-navy/75 hover:text-deep-navy'
+                  : 'text-slate-400 hover:text-white',
+              ]}
+            >
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href="/waitlist"
+        id="nav-cta"
+        class="btn-scalo-primary shrink-0 whitespace-nowrap px-4 py-2 text-xs font-bold md:px-5 md:py-2.5 md:text-sm lg:px-7 lg:text-[15px]"
+      >
+        Acceso anticipado
       </a>
     </div>
 
-    <!-- Desktop Nav -->
-    <ul id="nav-links" class="hidden md:flex flex-none items-center justify-center gap-8 transition-all duration-500" role="menubar">
-      {navLinks.map((link) => (
-        <li role="none">
-          <a
-            href={link.href}
-            role="menuitem"
-            class="text-slate-400 hover:text-white font-medium transition-colors duration-200 text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-scalo-primary rounded-md px-2 py-1"
-          >
-            {link.name}
-          </a>
-        </li>
-      ))}
-    </ul>
-
-    <!-- Actions (Right) -->
-    <div class="flex-1 flex justify-end items-center gap-4">
-      <!-- CTA Button -->
-      <a 
-        href="/waitlist" 
-        class="hidden md:flex bg-scalo-accent-violet hover:bg-scalo-accent-violet/90 text-white font-bold py-2 px-5 rounded-full text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_20px_-5px_rgba(139,92,246,0.6)]"
-      >
-        Private Testing
-      </a>
-      
-      <!-- Mobile Menu Toggle -->
-      <button
+    <button
       id="mobile-menu-btn"
-      class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none z-30"
+      class="z-30 flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-scalo-primary/30 md:hidden"
       aria-label="Abrir menú"
       aria-expanded="false"
     >
-      <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="line1"></span>
-      <span class="w-6 h-0.5 bg-white transition-all duration-200 origin-center" id="line2"></span>
-      <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="line3"></span>
-      </button>
-    </div>
+      <span class:list={['h-0.5 w-6 origin-center transition-all duration-300', variant === 'light' ? 'bg-deep-navy' : 'bg-white']} id="line1"></span>
+      <span class:list={['h-0.5 w-6 origin-center transition-all duration-200', variant === 'light' ? 'bg-deep-navy' : 'bg-white']} id="line2"></span>
+      <span class:list={['h-0.5 w-6 origin-center transition-all duration-300', variant === 'light' ? 'bg-deep-navy' : 'bg-white']} id="line3"></span>
+    </button>
   </nav>
 
-  <!-- Mobile Menu Drawer -->
+  <div
+    id="mobile-menu-backdrop"
+    class="pointer-events-none fixed inset-0 z-[5] bg-deep-navy/20 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 md:hidden"
+    aria-hidden="true"
+  ></div>
+
   <div
     id="mobile-menu-drawer"
-    class="absolute top-2 w-[calc(100%-2rem)] glass rounded-3xl p-6 pt-24 -translate-y-[120%] opacity-0 transition-all duration-500 z-10 flex flex-col gap-6 shadow-2xl border border-white/10 pointer-events-none pb-8 text-center origin-top"
+    class:list={[
+      'pointer-events-none absolute top-2 z-10 flex max-h-[calc(100dvh-5rem)] w-[calc(100%-2rem)] max-w-[1280px] -translate-y-[120%] flex-col gap-6 overflow-y-auto rounded-3xl p-6 pb-8 pt-20 opacity-0 shadow-2xl transition-all duration-500 origin-top md:hidden',
+      variant === 'light' ? 'border border-black/5 bg-white' : 'glass border border-white/10',
+    ]}
   >
-    <ul class="flex flex-col gap-6 items-center">
+    <ul class="flex flex-col items-center gap-6">
       {navLinks.map((link) => (
         <li>
-          <a
-            href={link.href}
-            class="mobile-link text-xl text-slate-300 hover:text-white font-bold transition-colors font-outfit uppercase tracking-wider"
-          >
+          <a href={link.href} class="mobile-link font-outfit text-xl font-bold text-deep-navy/80 transition-colors hover:text-scalo-primary">
             {link.name}
           </a>
         </li>
       ))}
       <li>
-        <a
-          href="/waitlist"
-          class="mobile-link text-xl text-scalo-accent-violet hover:text-white font-bold transition-colors font-outfit uppercase tracking-wider mt-4 inline-block border border-scalo-accent-violet/50 px-6 py-2 rounded-full"
-        >
-          Private Testing
+        <a href="/waitlist" class="mobile-link btn-scalo-primary mt-2 inline-block px-8 py-3 text-base">
+          Acceso anticipado
         </a>
       </li>
     </ul>
   </div>
 </header>
 
+<style>
+  .nav-link.is-active {
+    background: var(--color-scalo-primary-50);
+    color: var(--color-deep-navy);
+    font-weight: 600;
+  }
+</style>
+
 <script>
-  const header   = document.getElementById('main-header')!;
-  const nav      = document.getElementById('main-nav')!;
-  const logo     = document.getElementById('nav-logo') as HTMLImageElement;
-  const navLinks = document.getElementById('nav-links')!;
-
-
+  const header = document.getElementById('main-header')!;
+  const nav = document.getElementById('main-nav')!;
+  const navLinkItems = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
 
   let isScrolled = false;
 
+  function setActiveLink(activeId: string) {
+    navLinkItems.forEach((link) => {
+      const isActive = link.dataset.section === activeId;
+      link.classList.toggle('is-active', isActive);
+    });
+  }
+
+  // Figma: al scroll el menú se encoge horizontalmente en pill flotante (solo desktop)
   function applyScrollState(scrolled: boolean) {
-    if (scrolled) {
-      // ── Isla compacta (~65% del ancho) ────────────────────────────
-      nav.classList.remove('w-full', 'max-w-7xl', 'rounded-2xl', 'px-6', 'py-3', 'border-white/5');
-      nav.classList.add('rounded-full', 'px-5', 'py-2', 'shadow-2xl', 'shadow-black/40', 'border-white/10');
-      nav.style.maxWidth = '780px';
-      nav.style.width    = 'calc(100% - 2rem)';
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
 
-      // Logo más pequeño
-      logo.classList.remove('h-10');
-      logo.classList.add('h-7');
+    if (scrolled && isDesktop) {
+      header.classList.remove('px-4', 'md:px-6');
+      header.classList.add('px-8', 'md:px-14', 'lg:px-20');
 
-      // Links: fuente un poco más chica
-      navLinks.classList.add('gap-5');
-      navLinks.classList.remove('gap-8');
-
-      // CTA: compactar padding en isla
-
-      header.classList.replace('pt-4', 'pt-3');
+      nav.classList.remove('max-w-[1280px]');
+      nav.classList.add('max-w-[900px]');
     } else {
-      // ── Barra completa ────────────────────────────────────────────
-      nav.classList.add('w-full', 'max-w-7xl', 'rounded-2xl', 'px-6', 'py-3', 'border-white/5');
-      nav.classList.remove('rounded-full', 'px-5', 'py-2', 'shadow-2xl', 'shadow-black/40', 'border-white/10');
-      nav.style.maxWidth = '';
-      nav.style.width    = '';
+      header.classList.add('px-4', 'md:px-6');
+      header.classList.remove('px-8', 'md:px-14', 'lg:px-20');
 
-      logo.classList.replace('h-7', 'h-10');
-
-      navLinks.classList.replace('gap-5', 'gap-8');
-
-
-
-      header.classList.replace('pt-3', 'pt-4');
+      nav.classList.add('max-w-[1280px]');
+      nav.classList.remove('max-w-[900px]');
     }
   }
 
-  window.addEventListener('scroll', () => {
-    const shouldBeScrolled = window.scrollY > 40;
-    if (shouldBeScrolled !== isScrolled) {
-      isScrolled = shouldBeScrolled;
-      applyScrollState(isScrolled);
-    }
-  }, { passive: true });
+  window.addEventListener(
+    'scroll',
+    () => {
+      const shouldBeScrolled = window.scrollY > 40;
+      if (shouldBeScrolled !== isScrolled) {
+        isScrolled = shouldBeScrolled;
+        applyScrollState(isScrolled);
+      }
+    },
+    { passive: true }
+  );
 
-  // ── Mobile menu ──────────────────────────────────────────────────
-  const mobileBtn    = document.getElementById('mobile-menu-btn')!;
+  applyScrollState(window.scrollY > 40);
+  window.addEventListener('resize', () => applyScrollState(isScrolled), { passive: true });
+
+  const sections = ['inicio', 'acerca', 'producto', 'como-funciona', 'faqs', 'contacto'];
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          const activeId =
+            id === 'como-funciona' ? 'producto' : id;
+          setActiveLink(activeId);
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+  );
+
+  sections.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  if (window.scrollY < 100) {
+    setActiveLink('inicio');
+  }
+
+  const mobileBtn = document.getElementById('mobile-menu-btn')!;
+  const mobileBackdrop = document.getElementById('mobile-menu-backdrop')!;
   const mobileDrawer = document.getElementById('mobile-menu-drawer')!;
-  const line1        = document.getElementById('line1')!;
-  const line2        = document.getElementById('line2')!;
-  const line3        = document.getElementById('line3')!;
-  const mobileLinks  = document.querySelectorAll('.mobile-link');
+  const line1 = document.getElementById('line1')!;
+  const line2 = document.getElementById('line2')!;
+  const line3 = document.getElementById('line3')!;
+  const mobileLinks = document.querySelectorAll('.mobile-link');
 
   let menuOpen = false;
 
@@ -195,6 +203,8 @@ const navLinks = [
     mobileBtn.setAttribute('aria-expanded', menuOpen.toString());
 
     if (menuOpen) {
+      mobileBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+      mobileBackdrop.classList.add('opacity-100', 'pointer-events-auto');
       mobileDrawer.classList.remove('-translate-y-[120%]', 'opacity-0', 'pointer-events-none');
       mobileDrawer.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
       line1.classList.add('translate-y-2', 'rotate-45');
@@ -202,6 +212,8 @@ const navLinks = [
       line3.classList.add('-translate-y-2', '-rotate-45');
       document.body.style.overflow = 'hidden';
     } else {
+      mobileBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      mobileBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
       mobileDrawer.classList.add('-translate-y-[120%]', 'opacity-0', 'pointer-events-none');
       mobileDrawer.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
       line1.classList.remove('translate-y-2', 'rotate-45');
@@ -212,5 +224,6 @@ const navLinks = [
   };
 
   mobileBtn.addEventListener('click', toggleMenu);
-  mobileLinks.forEach(link => link.addEventListener('click', () => { if (menuOpen) toggleMenu(); }));
+  mobileBackdrop.addEventListener('click', toggleMenu);
+  mobileLinks.forEach((link) => link.addEventListener('click', () => { if (menuOpen) toggleMenu(); }));
 </script>
