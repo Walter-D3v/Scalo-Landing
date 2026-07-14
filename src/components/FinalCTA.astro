@@ -1,11 +1,11 @@
 ---
 ---
 
-<section class="relative overflow-hidden bg-white">
-  <div class="cta-stage relative mx-auto max-w-[1284px] px-5 sm:px-8">
+<section id="contacto" class="relative overflow-hidden bg-white scroll-mt-24 md:scroll-mt-28">
+  <div class="cta-stage relative mx-auto max-w-[1284px] px-4 sm:px-6 md:px-8">
     <!-- Formas ancladas abajo, justo antes del footer -->
     <div
-      class="cta-shapes pointer-events-none absolute bottom-4 left-1/2 z-0 w-full max-w-[1240px] -translate-x-1/2 sm:bottom-5 md:bottom-7"
+      class="cta-shapes pointer-events-none absolute left-1/2 z-0 w-[108%] max-w-[1240px] -translate-x-1/2 sm:w-full"
       aria-hidden="true"
     >
       <svg class="block h-auto w-full" viewBox="0 0 1580.53 171" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
@@ -27,14 +27,14 @@
 
     <!-- Caja glass encima de las formas -->
     <div class="cta-card-wrap">
-      <div class="cta-card w-full rounded-[24px] px-5 py-7 text-center sm:rounded-[28px] sm:px-7 sm:py-8 md:rounded-[35px] md:px-11 md:py-9 lg:py-10">
-        <h2 class="animate-reveal mb-4 font-outfit text-[1.5rem] font-bold leading-[1.08] tracking-[-0.035em] sm:mb-5 sm:text-[1.85rem] md:mb-6 md:text-[2.65rem] lg:text-[2.85rem]">
+      <div class="cta-card w-full rounded-[20px] px-4 py-6 text-center sm:rounded-[28px] sm:px-7 sm:py-8 md:rounded-[35px] md:px-11 md:py-9 lg:py-10">
+        <h2 class="animate-reveal mb-3 font-outfit text-[1.35rem] font-bold leading-[1.1] tracking-[-0.035em] sm:mb-5 sm:text-[1.85rem] md:mb-6 md:text-[2.65rem] lg:text-[2.85rem]">
           <span class="text-scalo-primary-dark">Tu negocio merece tomar</span><br />
           <span class="text-scalo-primary-dark">mejores decisiones.</span>
           <span class="text-deep-navy"> Empieza hoy.</span>
         </h2>
         <p
-          class="animate-reveal mx-auto mb-7 max-w-[600px] font-outfit text-sm font-semibold leading-[1.35] text-deep-navy/70 sm:mb-8 md:text-[15px] lg:text-base"
+          class="animate-reveal mx-auto mb-6 max-w-[600px] font-outfit text-[13px] font-semibold leading-[1.35] text-deep-navy/70 sm:mb-8 sm:text-sm md:text-[15px] lg:text-base"
           style="transition-delay: 0.1s"
         >
           Únete al piloto fundador de Scalo. Acceso gratuito, sin compromiso y con participación directa en lo que construimos.
@@ -53,17 +53,21 @@
 
 <style>
   .cta-stage {
-    min-height: clamp(22rem, 58vw, 30rem);
-    padding-top: 3.5rem;
-    padding-bottom: clamp(9rem, 24vw, 13rem);
+    min-height: clamp(19rem, 88vw, 30rem);
+    padding-top: 2.75rem;
+    padding-bottom: clamp(8rem, 36vw, 13rem);
+  }
+
+  .cta-shapes {
+    bottom: clamp(1.25rem, 5vw, 1.75rem);
   }
 
   .cta-card-wrap {
     position: absolute;
     left: 50%;
-    top: 44%;
+    top: 40%;
     z-index: 10;
-    width: 100%;
+    width: calc(100% - 0.5rem);
     max-width: 780px;
     transform: translate(-50%, -50%);
   }
@@ -84,6 +88,34 @@
     }
   }
 
+  @media (min-width: 480px) {
+    .cta-stage {
+      padding-top: 3.25rem;
+    }
+
+    .cta-card-wrap {
+      top: 42%;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .cta-stage {
+      min-height: clamp(21rem, 62vw, 30rem);
+      padding-top: 3.5rem;
+      padding-bottom: clamp(9rem, 28vw, 13rem);
+    }
+
+    .cta-shapes {
+      bottom: 1.5rem;
+      width: 100%;
+    }
+
+    .cta-card-wrap {
+      top: 43%;
+    }
+  }
+
   @media (min-width: 768px) {
     .cta-stage {
       min-height: clamp(24rem, 42vw, 32rem);
@@ -91,8 +123,18 @@
       padding-bottom: clamp(10rem, 18vw, 14rem);
     }
 
+    .cta-shapes {
+      bottom: 1.75rem;
+    }
+
     .cta-card-wrap {
       top: 42%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cta-shapes {
+      bottom: 2rem;
     }
   }
 </style>
