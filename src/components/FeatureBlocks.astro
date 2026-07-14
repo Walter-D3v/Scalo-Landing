@@ -92,6 +92,8 @@ const blocks = [
             </div>
           </div>
         </div>
+
+        {index < blocks.length - 1 && <div class="feature-band-spacer" aria-hidden="true"></div>}
       </>
     ))}
     <div class="feature-stack-tail" aria-hidden="true"></div>
@@ -133,6 +135,42 @@ const blocks = [
   function getBandStickyTop(band: HTMLElement) {
     const index = Number(band.dataset.featureBand ?? 0);
     return getStickyTop() + index * getStackStep();
+  }
+
+  function getVisibleBandHeight(band: HTMLElement) {
+    const stickyTop = getBandStickyTop(band);
+    const index = Number(band.dataset.featureBand ?? 0);
+    const stackReserve = (bands.length - 1 - index) * getStackStep();
+    return window.innerHeight - stickyTop - stackReserve;
+  }
+
+  function syncRunways() {
+    const viewportHeight = window.innerHeight;
+    const readBuffer = clamp(viewportHeight * 0.2, 120, 220);
+    const extraCap = viewportHeight * (viewportHeight < 740 ? 0.24 : 0.2);
+
+    bands.forEach((band) => {
+      const spacer = band.nextElementSibling as HTMLElement | null;
+      if (!spacer?.classList.contains('feature-band-spacer')) return;
+
+      const bandHeight = band.offsetHeight;
+      const visibleWhenStuck = getVisibleBandHeight(band);
+      const hiddenContent = Math.max(0, bandHeight - visibleWhenStuck);
+      const extraScroll = Math.min(readBuffer, extraCap);
+      const runway = hiddenContent + extraScroll;
+
+      spacer.style.height = `${Math.round(runway)}px`;
+    });
+
+    const tail = document.querySelector<HTMLElement>('.feature-stack-tail');
+    const lastBand = bands[bands.length - 1];
+
+    if (tail && lastBand) {
+      const visibleWhenStuck = getVisibleBandHeight(lastBand);
+      const hiddenContent = Math.max(0, lastBand.offsetHeight - visibleWhenStuck);
+      const extraScroll = Math.min(readBuffer, extraCap);
+      tail.style.height = `${Math.round(hiddenContent + extraScroll)}px`;
+    }
   }
 
   function updateFeatureBands() {
@@ -203,11 +241,14 @@ const blocks = [
 
   if (section) sectionObserver.observe(section);
 
+  syncRunways();
   updateFeatureBands();
   window.addEventListener('resize', () => {
     resetLockedBands();
+    syncRunways();
     updateFeatureBands();
   }, { passive: true });
+  window.addEventListener('load', syncRunways, { passive: true });
 </script>
 
 <style>
@@ -262,6 +303,18 @@ const blocks = [
       0 -12px 32px rgba(15, 13, 53, 0.18);
   }
 
+  .feature-band-spacer {
+    height: 0;
+    flex-shrink: 0;
+    pointer-events: none;
+  }
+
+  .feature-stack-tail {
+    height: calc(var(--feature-stack-step) * 2 + clamp(6rem, 22vh, 14rem));
+    flex-shrink: 0;
+    pointer-events: none;
+  }
+
   @media (min-width: 1024px) {
     .feature-band {
       min-height: 520px;
@@ -280,16 +333,17 @@ const blocks = [
     }
   }
 
+  @media (max-height: 720px) {
+    .feature-band > .relative {
+      padding-top: 2.5rem !important;
+      padding-bottom: 2.5rem !important;
+    }
+  }
+
   @media (min-width: 1280px) {
     .feature-band {
       min-height: 580px;
     }
-  }
-
-  .feature-stack-tail {
-    height: calc(var(--feature-stack-step) * 2 + clamp(8rem, 28vh, 16rem));
-    flex-shrink: 0;
-    pointer-events: none;
   }
 
   .feature-reveal {
