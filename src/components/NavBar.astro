@@ -8,7 +8,7 @@ const { variant = 'light' } = Astro.props;
 const navLinks = [
   { name: 'Inicio', href: '/#inicio', id: 'inicio' },
   { name: 'Producto', href: '/#producto', id: 'producto' },
-  { name: 'Acerca', href: '/#acerca', id: 'acerca' },
+  { name: 'Acerca', href: '/#como-funciona', id: 'como-funciona' },
   { name: 'Precio', href: '/#faqs', id: 'faqs' },
   { name: 'Contacto', href: '/#contacto', id: 'contacto' },
 ];
@@ -164,15 +164,12 @@ const navLinks = [
   applyScrollState(window.scrollY > 40);
   window.addEventListener('resize', () => applyScrollState(isScrolled), { passive: true });
 
-  const sections = ['inicio', 'acerca', 'producto', 'como-funciona', 'faqs', 'contacto'];
+  const sections = ['inicio', 'producto', 'como-funciona', 'faqs', 'contacto'];
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const id = entry.target.id;
-          const activeId =
-            id === 'como-funciona' ? 'producto' : id;
-          setActiveLink(activeId);
+          setActiveLink(entry.target.id);
         }
       });
     },
