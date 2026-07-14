@@ -1,10 +1,19 @@
 ---
-const logos = [
-  { src: '/images/home/logo-a.png', alt: 'Empresa A' },
-  { src: '/images/home/logo-b.png', alt: 'Empresa B' },
-  { src: '/images/home/logo-c.png', alt: 'Empresa C' },
-  { src: '/images/home/logo-d.png', alt: 'Empresa D' },
+const logoFiles = [
+  { file: 'Logo_C2N.png', alt: 'C2N' },
+  { file: 'Logo_daju.png', alt: 'Daju' },
+  { file: 'Logo_DobleArte.png', alt: 'Doble Arte' },
+  { file: 'Logo_F.Multihierro.png', alt: 'F. Multihierro' },
+  { file: 'Logo_fruto.png', alt: 'Fruto' },
+  { file: 'Logo_IB Health.png', alt: 'IB Health' },
+  { file: 'Logo_tuyomío.png', alt: 'Tuyomío' },
 ];
+
+const logos = logoFiles.map(({ file, alt }) => ({
+  src: `/logos/${encodeURIComponent(file)}`,
+  alt,
+}));
+
 const marqueeLogos = [...logos, ...logos];
 ---
 
@@ -29,8 +38,8 @@ const marqueeLogos = [...logos, ...logos];
           alt={logo.alt}
           class="h-12 w-auto flex-shrink-0 object-contain opacity-50 grayscale sm:h-14 md:h-20 lg:h-[92px]"
           loading="lazy"
-          width="238"
-          height="92"
+          width="500"
+          height="200"
           aria-hidden={i >= logos.length}
         />
       ))}
