@@ -26,14 +26,13 @@ const fields: WaitlistField[] = [
 >
   <NavBar variant="light" />
 
-  <main class="relative min-h-[calc(100vh-80px)] overflow-hidden bg-hero-linen">
-    <section class="relative z-10 mx-auto flex max-w-[1240px] flex-1 items-center px-4 py-24 sm:px-6 sm:py-28 md:py-32 lg:px-10">
-      <div class="relative w-full overflow-hidden">
-        <!-- Círculos y formas de color detrás del panel -->
-        <div
-          class="pointer-events-none absolute bottom-[-6%] left-1/2 z-0 w-full max-w-[1180px] -translate-x-1/2"
-          aria-hidden="true"
-        >
+  <main class="relative overflow-hidden bg-hero-linen">
+    <section class="waitlist-stage relative mx-auto max-w-[1284px] px-4 pt-24 sm:px-6 sm:pt-28 md:px-8 md:pt-32">
+      <!-- Formas ancladas abajo, justo antes del footer -->
+      <div
+        class="waitlist-shapes pointer-events-none absolute left-1/2 z-0 w-[108%] max-w-[1240px] -translate-x-1/2 sm:w-full"
+        aria-hidden="true"
+      >
           <svg class="block w-full h-auto" viewBox="0 0 1580.53 171" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             <circle cx="85.5" cy="85.5001" r="85.5" fill="#E0EA25" />
             <circle cx="1495.03" cy="85.5" r="85.5" fill="#5D95FD" />
@@ -49,10 +48,11 @@ const fields: WaitlistField[] = [
             <circle cx="85.5" cy="85.5" r="85.5" fill="#F47A49" />
             <circle cx="1495.03" cy="85.5" r="85.5" fill="#5D49F6" />
           </svg>
-        </div>
+      </div>
 
-        <!-- Panel glass exterior -->
-        <div class="waitlist-glass relative z-10 rounded-[24px] border border-white/70 p-5 sm:rounded-[32px] sm:p-6 md:rounded-[50px] md:p-10 lg:p-12">
+      <!-- Panel glass encima de las formas -->
+      <div class="waitlist-card-wrap relative z-10">
+        <div class="waitlist-glass rounded-[24px] border border-white/70 p-5 sm:rounded-[32px] sm:p-6 md:rounded-[50px] md:p-10 lg:p-12">
           <div class="grid items-center gap-8 sm:gap-10 md:grid-cols-2 md:gap-10 lg:gap-14 xl:gap-20">
             <div class="animate-reveal space-y-4 px-0 sm:space-y-5 md:space-y-6 md:px-2" style="transition-delay: 0.1s">
               <h1 class="font-outfit text-[1.65rem] font-bold leading-[1.08] tracking-[-0.03em] text-scalo-primary-dark sm:text-[1.9rem] md:text-[2.35rem] lg:text-[2.65rem] xl:text-[2.85rem]">
@@ -118,11 +118,59 @@ const fields: WaitlistField[] = [
   <Footer />
 
   <style>
+    .waitlist-stage {
+      padding-bottom: clamp(8rem, 36vw, 13rem);
+    }
+
+    .waitlist-shapes {
+      bottom: clamp(1.25rem, 5vw, 1.75rem);
+    }
+
+    .waitlist-card-wrap {
+      margin-bottom: clamp(-2.5rem, -8vw, -1rem);
+    }
+
     .waitlist-glass {
-      background: rgba(255, 255, 255, 0.42);
-      box-shadow: 0 4px 24px rgba(35, 18, 70, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: rgba(217, 217, 217, 0.28);
+      box-shadow:
+        0 4px 20px rgba(35, 18, 70, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
       -webkit-backdrop-filter: blur(16px) saturate(1.15);
       backdrop-filter: blur(16px) saturate(1.15);
+    }
+
+    @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+      .waitlist-glass {
+        background: rgba(245, 245, 245, 0.92);
+      }
+    }
+
+    @media (min-width: 640px) {
+      .waitlist-stage {
+        padding-bottom: clamp(9rem, 28vw, 13rem);
+      }
+
+      .waitlist-shapes {
+        bottom: 1.5rem;
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .waitlist-stage {
+        padding-bottom: clamp(10rem, 18vw, 14rem);
+      }
+
+      .waitlist-shapes {
+        bottom: 1.75rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .waitlist-shapes {
+        bottom: 2rem;
+      }
     }
 
     .waitlist-form-box {
