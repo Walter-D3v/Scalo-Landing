@@ -30,92 +30,211 @@ const blocks = [
 ];
 ---
 
-<section id="producto" class="overflow-hidden bg-white pb-8 md:pb-10">
-  <div class="feature-stack mx-auto w-full max-w-[1440px] overflow-hidden rounded-[28px] bg-[#0f0d35] sm:rounded-[36px] md:rounded-[64px] lg:rounded-[88px]">
+<section id="producto" class="bg-white pb-8 md:pb-10">
+  <div class="feature-stack mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-0">
     {blocks.map((block, index) => (
-      <div
-        class:list={[
-          'feature-band relative overflow-hidden',
-          block.bg,
-          index === 0 ? 'rounded-t-[36px] md:rounded-t-[64px] lg:rounded-t-[88px]' : '-mt-6 rounded-t-[28px] sm:-mt-8 sm:rounded-t-[32px] md:-mt-14 md:rounded-t-[64px] lg:-mt-16 lg:rounded-t-[88px]',
-          index === blocks.length - 1 ? 'rounded-b-[36px] md:rounded-b-[64px] lg:rounded-b-[88px]' : '',
-        ]}
-      >
-        <div class="absolute inset-0 opacity-30" aria-hidden="true">
-          <img src="/images/home/bg-ellipses.png" alt="" class="h-full w-full scale-125 object-cover" />
-        </div>
-
+      <>
         <div
           class:list={[
-            'relative px-4 sm:px-6 md:px-14 lg:px-16 xl:px-20',
-            index === 0 ? 'pt-12 pb-12 sm:pt-14 md:pt-20 md:pb-20 lg:pt-[88px] lg:pb-[88px]' : 'pt-16 pb-12 sm:pt-20 md:pt-28 md:pb-20 lg:pt-[148px] lg:pb-[88px]',
+            'feature-band sticky relative overflow-hidden rounded-[36px] md:rounded-[64px] lg:rounded-[88px]',
+            block.bg,
           ]}
+          data-feature-band={index}
+          style={`z-index: ${index + 1}; --stack-index: ${index}`}
         >
-          <div
-            class:list={[
-              'feature-row mx-auto flex w-full max-w-[1080px] flex-col items-center gap-10 md:gap-12 lg:gap-16 xl:gap-20',
-              block.imagePosition === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row',
-            ]}
-          >
-            <!-- Image card -->
-            <div class="feature-reveal w-full shrink-0 lg:w-[48%] lg:max-w-[647px]" style={`transition-delay: ${index * 0.12}s`}>
-              <div class="feature-img-box mx-auto lg:mx-0">
-                <div class="relative overflow-hidden rounded-[22px] bg-black/10 shadow-[2px_2px_10px_0px_rgba(16,14,50,0.5)] md:rounded-[30px]">
-                  <picture>
-                    <source srcset={block.imageWebp} type="image/webp" />
-                    <img
-                      src={block.image}
-                      alt={block.title}
-                      class="aspect-[468/304] w-full object-cover object-center"
-                      loading={index === 0 ? 'eager' : 'lazy'}
-                      decoding={index === 0 ? 'sync' : 'async'}
-                      fetchpriority={index === 0 ? 'high' : 'low'}
-                      width="936"
-                      height="608"
-                    />
-                  </picture>
-                </div>
-                <a
-                  href="/waitlist"
-                  class="mt-5 flex h-[45px] w-full items-center justify-center rounded-full bg-white/50 text-[11px] font-extrabold uppercase tracking-[1.5px] text-white transition-colors hover:bg-white/65 sm:text-[13px] sm:tracking-[3px] md:tracking-[5px] md:text-sm"
-                >
-                  comenzar ahora
-                </a>
-              </div>
-            </div>
+          <div class="absolute inset-0 opacity-30" aria-hidden="true">
+            <img src="/images/home/bg-ellipses.png" alt="" class="h-full w-full scale-125 object-cover" />
+          </div>
 
-            <!-- Text -->
+          <div class="relative px-4 py-12 sm:px-6 sm:py-14 md:px-14 md:py-20 lg:px-16 lg:py-[88px] xl:px-20">
             <div
-              class="feature-reveal w-full shrink-0 space-y-4 md:space-y-5 lg:w-[48%] lg:max-w-[520px]"
-              style={`transition-delay: ${index * 0.12 + 0.1}s`}
+              class:list={[
+                'feature-row mx-auto flex w-full max-w-[1080px] flex-col items-center gap-10 md:gap-12 lg:gap-16 xl:gap-20',
+                block.imagePosition === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row',
+              ]}
             >
-              <h2 class="feature-heading max-w-[520px] font-outfit text-[1.55rem] font-bold leading-[1.05] tracking-[-0.03em] text-white sm:text-3xl md:text-4xl lg:text-[3rem] xl:text-[52px]">
-                {block.title}
-              </h2>
-              <p class="feature-copy max-w-[520px] font-outfit text-sm font-light leading-[1.32] text-white/90 md:text-base lg:text-[17px]">
-                {block.descriptionBefore && <span>{block.descriptionBefore}</span>}
-                {block.descriptionBold && <strong class="font-semibold text-white">{block.descriptionBold}</strong>}
-                {block.descriptionAfter && <span>{block.descriptionAfter}</span>}
-              </p>
+              <div class="feature-reveal feature-reveal-image w-full shrink-0 lg:w-[48%] lg:max-w-[647px]">
+                <div class="feature-img-box mx-auto lg:mx-0">
+                  <div class="relative overflow-hidden rounded-[22px] bg-black/10 shadow-[2px_2px_10px_0px_rgba(16,14,50,0.5)] md:rounded-[30px]">
+                    <picture>
+                      <source srcset={block.imageWebp} type="image/webp" />
+                      <img
+                        src={block.image}
+                        alt={block.title}
+                        class="aspect-[468/304] w-full object-cover object-center"
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        decoding={index === 0 ? 'sync' : 'async'}
+                        fetchpriority={index === 0 ? 'high' : 'low'}
+                        width="936"
+                        height="608"
+                      />
+                    </picture>
+                  </div>
+                  <a
+                    href="/waitlist"
+                    class="mt-5 flex h-[45px] w-full items-center justify-center rounded-full bg-white/50 text-[11px] font-extrabold uppercase tracking-[1.5px] text-white transition-colors hover:bg-white/65 sm:text-[13px] sm:tracking-[3px] md:tracking-[5px] md:text-sm"
+                  >
+                    comenzar ahora
+                  </a>
+                </div>
+              </div>
+
+              <div class="feature-reveal feature-reveal-text w-full shrink-0 space-y-4 md:space-y-5 lg:w-[48%] lg:max-w-[520px]">
+                <h2 class="feature-heading max-w-[520px] font-outfit text-[1.55rem] font-bold leading-[1.05] tracking-[-0.03em] text-white sm:text-3xl md:text-4xl lg:text-[3rem] xl:text-[52px]">
+                  {block.title}
+                </h2>
+                <p class="feature-copy max-w-[520px] font-outfit text-sm font-light leading-[1.32] text-white/90 md:text-base lg:text-[17px]">
+                  {block.descriptionBefore && <span>{block.descriptionBefore}</span>}
+                  {block.descriptionBold && <strong class="font-semibold text-white">{block.descriptionBold}</strong>}
+                  {block.descriptionAfter && <span>{block.descriptionAfter}</span>}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     ))}
+    <div class="feature-stack-tail" aria-hidden="true"></div>
   </div>
 </section>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  const bands = document.querySelectorAll<HTMLElement>('[data-feature-band]');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealState = new Map<HTMLElement, number>();
+  const lockedBands = new Set<HTMLElement>();
+  let rafId = 0;
 
-  document.querySelectorAll('.feature-reveal').forEach((el) => observer.observe(el));
+  const stack = document.querySelector<HTMLElement>('.feature-stack');
+
+  function clamp(value: number, min = 0, max = 1) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function easeOutCubic(value: number) {
+    return 1 - Math.pow(1 - value, 3);
+  }
+
+  function readStackVar(name: string, fallback: number) {
+    const source = stack ?? document.documentElement;
+    const raw = getComputedStyle(source).getPropertyValue(name).trim();
+    const parsed = parseFloat(raw);
+    return Number.isFinite(parsed) ? parsed : fallback;
+  }
+
+  function getStickyTop() {
+    return readStackVar('--feature-sticky-top', 76);
+  }
+
+  function getStackStep() {
+    return readStackVar('--feature-stack-step', 20);
+  }
+
+  function getBandStickyTop(band: HTMLElement) {
+    const index = Number(band.dataset.featureBand ?? 0);
+    return getStickyTop() + index * getStackStep();
+  }
+
+  function updateFeatureBands() {
+    const viewportHeight = window.innerHeight;
+    const enterStart = viewportHeight * 0.92;
+
+    bands.forEach((band) => {
+      if (prefersReducedMotion) {
+        band.style.setProperty('--reveal', '1');
+        return;
+      }
+
+      const rect = band.getBoundingClientRect();
+      const stickyTop = getBandStickyTop(band);
+
+      if (lockedBands.has(band) || rect.top <= stickyTop + 4) {
+        lockedBands.add(band);
+        band.classList.add('is-stuck');
+        band.style.setProperty('--reveal', '1');
+        revealState.set(band, 1);
+        return;
+      }
+
+      band.classList.remove('is-stuck');
+
+      const enterEnd = stickyTop + 40;
+      const target = easeOutCubic(clamp((enterStart - rect.top) / (enterStart - enterEnd)));
+      const current = revealState.get(band) ?? 0;
+      const smoothed = Math.max(current, current + (target - current) * 0.14);
+
+      revealState.set(band, smoothed);
+      band.style.setProperty('--reveal', smoothed.toFixed(4));
+    });
+  }
+
+  function startScrollLoop() {
+    if (rafId) return;
+
+    const tick = () => {
+      updateFeatureBands();
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function stopScrollLoop() {
+    if (!rafId) return;
+    cancelAnimationFrame(rafId);
+    rafId = 0;
+  }
+
+  function resetLockedBands() {
+    lockedBands.clear();
+    bands.forEach((band) => band.classList.remove('is-stuck'));
+  }
+
+  const section = document.getElementById('producto');
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) startScrollLoop();
+        else stopScrollLoop();
+      });
+    },
+    { threshold: 0 }
+  );
+
+  if (section) sectionObserver.observe(section);
+
+  updateFeatureBands();
+  window.addEventListener('resize', () => {
+    resetLockedBands();
+    updateFeatureBands();
+  }, { passive: true });
 </script>
 
 <style>
+  .feature-stack {
+    --feature-sticky-top: 4.75rem;
+    --feature-stack-step: 1.25rem;
+    --feature-card-gap: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--feature-card-gap);
+  }
+
+  @media (min-width: 768px) {
+    .feature-stack {
+      --feature-stack-step: 1.75rem;
+      --feature-card-gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .feature-stack {
+      --feature-sticky-top: 5.5rem;
+      --feature-stack-step: 3.25rem;
+      --feature-card-gap: 3.75rem;
+    }
+  }
+
   .feature-row {
     justify-content: center;
   }
@@ -135,9 +254,20 @@ const blocks = [
     }
   }
 
+  .feature-band {
+    top: calc(var(--feature-sticky-top) + var(--stack-index) * var(--feature-stack-step));
+    --reveal: 0;
+    box-shadow:
+      0 -1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 -12px 32px rgba(15, 13, 53, 0.18);
+  }
+
   @media (min-width: 1024px) {
     .feature-band {
       min-height: 520px;
+      box-shadow:
+        0 -1px 0 rgba(255, 255, 255, 0.08) inset,
+        0 -20px 48px rgba(15, 13, 53, 0.22);
     }
 
     .feature-img-box {
@@ -156,26 +286,38 @@ const blocks = [
     }
   }
 
-  .feature-reveal {
-    opacity: 0;
-    transform: translate3d(0, 24px, 0);
-    will-change: opacity, transform;
-    transition:
-      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  .feature-stack-tail {
+    height: calc(var(--feature-stack-step) * 2 + clamp(8rem, 28vh, 16rem));
+    flex-shrink: 0;
+    pointer-events: none;
   }
 
-  .feature-reveal.visible {
+  .feature-reveal {
+    will-change: opacity, transform;
+  }
+
+  .feature-band.is-stuck .feature-reveal,
+  .feature-band.is-stuck .feature-reveal-image,
+  .feature-band.is-stuck .feature-reveal-text {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: none;
     will-change: auto;
+  }
+
+  .feature-reveal-image {
+    opacity: clamp(0, calc((var(--reveal) - 0.04) / 0.9), 1);
+    transform: translate3d(0, calc((1 - clamp(0, calc((var(--reveal) - 0.04) / 0.9), 1)) * 40px), 0);
+  }
+
+  .feature-reveal-text {
+    opacity: clamp(0, calc((var(--reveal) - 0.16) / 0.84), 1);
+    transform: translate3d(0, calc((1 - clamp(0, calc((var(--reveal) - 0.16) / 0.84), 1)) * 52px), 0);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .feature-reveal {
       opacity: 1;
       transform: none;
-      transition: none;
     }
   }
 </style>
