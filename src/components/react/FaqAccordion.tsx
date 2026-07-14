@@ -8,6 +8,10 @@ const faqs = [
     answer: 'Durante el piloto, el acceso es completamente gratuito. Cuando Scalo lance oficialmente, operará bajo un modelo de suscripción mensual accesible para pymes. Las empresas del piloto tendrán precio preferencial garantizado.',
   },
   {
+    question: '¿Qué necesito tener listo para empezar a probar Scalo?',
+    answer: 'Actualmente, basta con subir un formato Excel o CSV con tus ingresos y gastos básicos. Scalo se encargará del resto. En nuestras próximas actualizaciones, también podrás conectar tus datos en tiempo real con el CRM o sistema que ya utilices en tu negocio.',
+  },
+  {
     question: '¿Necesito un equipo técnico para usar Scalo?',
     answer: 'No. Scalo está diseñado para founders y equipos de negocio sin conocimientos técnicos. La plataforma se conecta con las herramientas que ya usas y te entrega insights en lenguaje claro, sin necesidad de analistas o desarrolladores.',
   },

@@ -30,31 +30,35 @@ const steps = [
       </p>
     </div>
 
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
+    <div class="how-steps-trigger pointer-events-none" aria-hidden="true"></div>
+
+    <div class="how-steps-grid grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
       {steps.map((step, i) => (
         <article
-          class="how-card relative bg-white rounded-[22px] md:rounded-[24px] lg:rounded-[26px] shadow-[0_6px_18px_rgba(16,14,50,0.16)] overflow-hidden flex flex-col animate-reveal"
-          style={`transition-delay: ${0.1 + i * 0.1}s`}
+          class="how-card relative flex flex-row items-start gap-3 overflow-hidden rounded-[22px] bg-white px-5 py-6 shadow-[0_6px_18px_rgba(16,14,50,0.16)] sm:flex-col sm:gap-0 sm:p-0 md:rounded-[24px] lg:rounded-[26px]"
         >
-          <div class="relative flex-shrink-0 h-[132px] md:h-[150px] lg:h-[165px] overflow-hidden" aria-hidden="true">
-            <span class="how-card-number absolute -top-1 left-5 md:left-6 font-outfit font-extrabold text-[#EDE5DC] select-none leading-none">
+          <div class="how-card-number-wrap relative shrink-0 sm:h-[150px] sm:w-full sm:overflow-hidden lg:h-[165px]" aria-hidden="true">
+            <span class="how-card-number font-outfit font-extrabold leading-none text-[#EDE5DC] select-none sm:absolute sm:-top-1 sm:left-6">
               {step.number}
             </span>
           </div>
 
-          <div class="relative -mt-2 flex flex-1 flex-col px-5 pb-7 sm:px-6 md:-mt-3 md:px-8 md:pb-9">
+          <div
+            class="how-card-content relative flex min-w-0 flex-1 flex-col sm:-mt-3 sm:px-8 sm:pb-9"
+            style={`--step-delay: ${0.2 + i * 0.5}s`}
+          >
             {step.titleLines ? (
-              <h3 class="mb-3 font-outfit text-xl font-bold leading-[1.12] tracking-[-0.025em] text-deep-navy sm:text-2xl md:text-[1.7rem] lg:text-[1.85rem]">
+              <h3 class="mb-2 font-outfit text-[1.15rem] font-bold leading-[1.12] tracking-[-0.025em] text-deep-navy sm:mb-3 sm:text-2xl md:text-[1.7rem] lg:text-[1.85rem]">
                 {step.titleLines.map((line) => (
                   <span class="block">{line}</span>
                 ))}
               </h3>
             ) : (
-              <h3 class="mb-3 font-outfit text-xl font-bold leading-[1.12] tracking-[-0.025em] text-deep-navy sm:text-2xl md:text-[1.7rem] lg:text-[1.85rem]">
+              <h3 class="mb-2 font-outfit text-[1.15rem] font-bold leading-[1.12] tracking-[-0.025em] text-deep-navy sm:mb-3 sm:text-2xl md:text-[1.7rem] lg:text-[1.85rem]">
                 {step.title}
               </h3>
             )}
-            <p class="text-[15px] md:text-base lg:text-[17px] text-deep-navy/70 font-outfit font-semibold leading-[1.22]">
+            <p class="font-outfit text-[13px] font-semibold leading-[1.28] text-deep-navy/70 sm:text-[15px] md:text-base lg:text-[17px] lg:leading-[1.22]">
               {step.description}
             </p>
           </div>
@@ -64,23 +68,85 @@ const steps = [
   </div>
 </section>
 
+<script>
+  const section = document.getElementById('como-funciona');
+  const trigger = section?.querySelector('.how-steps-trigger');
+  const grid = section?.querySelector('.how-steps-grid');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setStepsVisible(visible: boolean) {
+    grid?.classList.toggle('how-steps-visible', visible);
+  }
+
+  if (prefersReducedMotion) {
+    setStepsVisible(true);
+  } else if (trigger && grid) {
+    let hasPlayed = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || hasPlayed) return;
+          hasPlayed = true;
+          setStepsVisible(true);
+          observer.disconnect();
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: '-30% 0px -40% 0px',
+      }
+    );
+
+    observer.observe(trigger);
+  }
+</script>
+
 <style>
   .how-card {
     min-height: auto;
   }
+
+  .how-card-number {
+    font-size: clamp(4.75rem, 22vw, 6.5rem);
+    letter-spacing: -0.055em;
+  }
+
+  .how-card-content {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--step-delay, 0s);
+  }
+
+  .how-steps-visible .how-card-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .how-card-content {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   @media (min-width: 640px) {
     .how-card {
       min-height: 290px;
     }
+
+    .how-card-number {
+      font-size: clamp(8.75rem, 14vw, 12.5rem);
+    }
   }
+
   @media (min-width: 1024px) {
     .how-card {
       min-height: 338px;
     }
-  }
-
-  .how-card-number {
-    font-size: clamp(8.75rem, 14vw, 12.5rem);
-    letter-spacing: -0.055em;
   }
 </style>
